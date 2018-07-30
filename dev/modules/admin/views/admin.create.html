@@ -1,0 +1,154 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Create Admin
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+      <div class="box">
+
+        <div class="box-body" ng-show="!adminCtrl.formData">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <!-- /.box-header -->
+        <div class="alert alert-danger" ng-show="adminCtrl.error">{{ adminCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="adminCtrl.success">{{ adminCtrl.success_message }}</div>
+
+        <!-- form start -->
+        <form ng-submit="adminCtrl.createAdmin(admin_form)" id="admin_form" name="admin_form" class="form-horizontal" ng-show="adminCtrl.formData">
+
+         <div class="box-body">
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="firstName required-field">Name</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="text" class="form-control" id="full_name" name="full_name" ng-model="adminCtrl.admin.name" autocomplete="off" maxlength="50" ng-change="adminCtrl.clearValidationError('name')" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(admin_form.full_name.$valid) && !adminCtrl.validationError.name"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Name is required." ng-show="(admin_form.full_name.$error.required)&&(admin_form.full_name.$dirty)"></i> 
+                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{adminCtrl.validationError.name}}" ng-show="adminCtrl.validationError.name"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="required-field">Email</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="text" class="form-control" id="email" name="email" ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' ng-model="adminCtrl.admin.email" autocomplete="off" maxlength="50" ng-change="adminCtrl.clearValidationError('email')" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(admin_form.email.$valid) && !adminCtrl.validationError.email"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Email Address is not valid or required." ng-show="(admin_form.email.$error.required && admin_form.email.$dirty) || (admin_form.email.$error.pattern)"></i> 
+                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{adminCtrl.validationError.email}}" ng-show="adminCtrl.validationError.email"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="required-field">Phone</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="text" class="form-control" id="contact" name="contact" ng-model="adminCtrl.admin.contact" ng-pattern="/^[9][8][0|1|2|4|5|6]{1}[0-9]{7}$/" autocomplete="off" maxlength="10" ng-change="adminCtrl.clearValidationError('contact')" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(admin_form.contact.$valid) && !adminCtrl.validationError.contact"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Phone number must contain 10 character or not valid." ng-show="(admin_form.contact.$error.required && admin_form.contact.$dirty) || (admin_form.contact.$error.pattern)"></i> 
+                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{adminCtrl.validationError.contact}}" ng-show="adminCtrl.validationError.contact"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label">Address</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="text" class="form-control" id="address" name="address" ng-model="adminCtrl.admin.address" autocomplete="off" maxlength="50">
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="required-field">Gender</label> 
+            <div class="col-md-5 has-required-validation select">
+              <select class="form-control" id="gender" name="gender" ng-model="adminCtrl.admin.gender" required>
+                <option value="" ng-disabled="adminCtrl.admin.gender.length > 0" >Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <div class="required-validation">  
+                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{adminCtrl.validationError.gender}}" ng-show="adminCtrl.validationError.gender"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="required-field">Username</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="text" class="form-control" id="username" name="username" ng-model="adminCtrl.admin.username" ng-minlength="5" ng-pattern="/^([a-zA-Z0-9_.@]){5,}$/" autocomplete="off" maxlength="25" ng-change="adminCtrl.clearValidationError('username')" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(admin_form.username.$valid) && !adminCtrl.validationError.username"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Username must be at least 5 character long alphanumerical and can contain (@, _ and .)." ng-show="(admin_form.username.$error.required && admin_form.username.$dirty) || (admin_form.username.$error.pattern)"></i> 
+                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{adminCtrl.validationError.username}}" ng-show="adminCtrl.validationError.username"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="required-field">Password</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="password" class="form-control" id="admin_password" name="admin_password" ng-model="adminCtrl.admin.password" ng-change="adminCtrl.validatePasswordPolicy(adminCtrl.admin.password); adminCtrl.clearValidationError('username');">
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="admin_form.admin_password.$dirty && !(adminCtrl.pwdValidation.boolean)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="{{adminCtrl.pwdValidation.message}}" ng-show="(admin_form.admin_password.$error.required && admin_form.admin_password.$dirty) || (adminCtrl.pwdValidation.boolean)"></i> 
+                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{adminCtrl.validationError.password}}" ng-show="adminCtrl.validationError.password"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"> 
+            <label class="col-sm-3 control-label required-field" for="required-field">Confirm Password</label> 
+            <div class="col-md-5 has-required-validation">
+              <input type="password" class="form-control" id="confirm_password" name="confirm_password" ng-model="adminCtrl.confirm_password" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="admin_form.admin_password.$dirty && (adminCtrl.confirm_password === adminCtrl.admin.password)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Confirm password doesnot match" ng-show="(adminCtrl.confirm_password != adminCtrl.admin.password) && admin_form.confirm_password.$dirty && (adminCtrl.confirm_password.length > 0 || adminCtrl.admin.password.length > 0)"></i> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+           <label for="profile" class="col-sm-3 control-label required-field">Profile</label>
+
+           <div class="col-sm-5">
+             <ui-select ng-model="adminCtrl.admin.adminProfileId" ng-required="true">
+             <ui-select-match placeholder="Select a profile">{{$select.selected.name}}</ui-select-match>
+             <ui-select-choices repeat="profile.id as profile in adminCtrl.allProfiles | filter: {name: $select.search}">
+             <span ng-bind="profile.name"></span>
+           </ui-select-choices>
+         </ui-select>
+       </div>
+       <input type="button" ng-click="adminCtrl.profileDetailModal(adminCtrl.admin.adminProfileId)" ng-if="!(adminCtrl.admin.adminProfileId === undefined || adminCtrl.admin.adminProfileId < 1)" class="btn btn-warning" value="Show Detail"/>
+     </div>
+     <div class="btn-block" ng-show="adminCtrl.formData">
+      <label class="col-sm-3 control-label"></label>
+      <div class="col-md-9">
+        <button type="submit" class="btn btn-primary" ng-disabled="adminCtrl.formValidation(admin_form)">Create</button>  
+        <input type="button" ng-click="adminCtrl.resetForm(admin_form)" class="btn btn-default" value="Reset" />
+      </div>
+
+    </div>
+
+  </div>
+</form>
+</div>
+</div>
+<!-- /.box -->
+</div>        
+</section>
+<!-- content -->

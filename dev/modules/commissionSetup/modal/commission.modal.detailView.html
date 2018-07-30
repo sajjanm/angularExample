@@ -1,0 +1,137 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Commission Details</h3>
+  <button class="btn btn-close" type="button" ng-click="cmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+<div class="modal-body" id="modal-body">
+  <div class="box-body">
+    <div class="box-section">
+    <!-- <h5 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Transaction Information</h4> -->
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Payee Event</label>
+              <div class="form-value">{{cmCtrl.commissionData.payeeEventCommissionMapDtos[0].payeeEventDto.description | Capitalize}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Commission Payee</label>
+              <div class="form-value">{{cmCtrl.commissionData.commissionPayee | Capitalize}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Commission Type</label>
+              <div class="form-value">{{cmCtrl.commissionData.commissionType | Capitalize}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Is Blocked</label>
+              <div class="form-value">{{cmCtrl.commissionData.isBlocked}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Created By</label>
+              <div class="form-value">{{cmCtrl.commissionData.createdBy.name}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Created Date</label>
+              <div class="form-value">{{cmCtrl.commissionData.createdDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Modified By</label>
+              <div class="form-value">{{cmCtrl.commissionData.modifiedBy.name}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Modified Date</label>
+              <div class="form-value">{{cmCtrl.commissionData.modifiedDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-minimal-2" ng-if="cmCtrl.commissionData.commissionSlabDto">
+  <h5 class="modal-title" id="modal-title">Commission Slab Details</h5>
+    <table class="table report">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Created By</th>
+          <th>Created Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>{{cmCtrl.commissionData.commissionSlabDto.name}}</div>
+          </td>
+          <td>
+            <div>{{cmCtrl.commissionData.commissionSlabDto.description}}</div>
+          </td>
+          <td>
+            <div>{{cmCtrl.commissionData.commissionSlabDto.createdBy.name}}</div>
+          </td>
+          <td>
+            <div>{{cmCtrl.commissionData.commissionSlabDto.createdDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+          </td>
+        </tr>
+      </tbody>     
+    </table>
+
+    <h5 class="modal-title" id="modal-title">Commission Charges Details</h5>
+    <table class="table report">
+     <thead>
+      <tr>
+       <th>Charge Type</th>
+       <th>Ranges</th>
+       <th>Charge Value</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr data-ng-repeat="commissionSlabValue in cmCtrl.commissionData.commissionSlabDto.commissionSlabValueDtos">
+      <td>
+        <div class="col-sm-10 form-control">{{commissionSlabValue.chargeType}}</div>
+      </td>
+      <!-- <td>
+        <div class="col-sm-10 form-control">{{commissionSlabValue.rangeFrom}}</div>
+      </td> -->
+      <td>
+        <div ng-if="!commissionSlabValue.andAboveRange">{{commissionSlabValue.rangeTo}}</div>
+        <div ng-if="commissionSlabValue.andAboveRange">{{commissionSlabValue.rangeFrom}} and above ranges</div>
+      </td>
+      <td>
+        <div>{{commissionSlabValue.charge}}</div>
+      </td>
+    </tr>
+  </tbody>     
+</table> 
+
+<h5 class="modal-title" id="modal-title">Commission Partner Details</h5>
+<table class="table table-bordered-minimal">
+  <thead>
+   <tr>
+     <th>Commission Partner</th>
+     <th>Commission Value</th>
+     <th><!-- Remove Partner --></th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr data-ng-repeat="commissionShare in cmCtrl.commissionData.commissionShareDtos">
+    <td class="form-group">{{commissionShare.commissionPartnerDto.name}}</td>
+    <td class="form-group">{{commissionShare.commissionValue}}</td>
+  </tr>
+</tbody>     
+</table>
+</div>
+</div>

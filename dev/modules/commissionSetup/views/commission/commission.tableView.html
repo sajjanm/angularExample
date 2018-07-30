@@ -1,0 +1,76 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-settings"></i>
+    Commission Setup
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- /.box-header -->
+      <div class="alert alert-danger" ng-show="commissionCtrl.error">{{ commissionCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="commissionCtrl.success">{{ commissionCtrl.success_message }}</div>
+
+      <div class="box-body" ng-show="!commissionCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <div class="table-minimal-2" ng-show="commissionCtrl.paginationLoaded">
+        <table ng-table="commissionCtrl.tableParams" class="table filter-table">
+         <thead>
+          <tr>
+            <!-- <th>S.N</th> -->
+            <th>Payee Event</th>
+            <th>Commission Payee</th>
+            <th>Commission Type</th>
+            <th>Is Blocked</th>
+            <th>Created By</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-if="commissionCtrl.allCommissionByPagination.length" ng-repeat="commission in commissionCtrl.allCommissionByPagination" ng-click="commissionCtrl.detailModal(commission)">
+            <!-- <td style="text-align: left" class="text-center">
+              <span>{{$index+commissionCtrl.sno}}</span>
+            </td> -->
+            <td>{{commission.payeeEventCommissionMapDtos[0].payeeEventDto.description}}</td>
+            <td>{{commission.commissionPayee | Capitalize}}</td>
+            <td>{{commission.commissionType | Capitalize}}</td>
+
+            <td>{{commission.isBlocked}}</td>
+            <td>{{commission.createdBy.name}}</td>
+            <td class="action-column">
+              <a uib-tooltip="Edit Commission" ng-click="commissionCtrl.editCommission(commission); $event.stopPropagation();">
+                <i class="mdi mdi-pen"></i>
+              </a>
+              <a ng-click="commissionCtrl.blockUnblockCommission(commission); $event.stopPropagation();">
+                <i uib-tooltip="Block Commission" ng-if="!commission.isBlocked" class="mdi mdi-lock"></i>
+                <i uib-tooltip="Unblock Commission" ng-if="commission.isBlocked" class="mdi mdi-lock-open-outline"></i>
+              </a>
+            </td>
+          </tr>
+          <tr ng-if="commissionCtrl.paginationLoaded && commissionCtrl.allCommissionByPagination.length === 0">
+            <td colspan="7">No records found.</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>  
+
+
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+</section>
+<!-- /.content -->

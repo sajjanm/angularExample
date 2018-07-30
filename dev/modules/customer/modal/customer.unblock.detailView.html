@@ -1,0 +1,98 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Customer Details</h3>
+  <button class="btn btn-close" type="button" ng-click="ucmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+<div class="modal-body" id="modal-body">
+  <div class="box-body">
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Customer Information</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">First Name</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.customerDto.firstName}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Middle Name</label>
+              <div class="form-value" ng-if="ucmCtrl.customerLogin.customerDto.middleName == ''">N/A</div>
+              <div class="form-value" ng-if="ucmCtrl.customerLogin.customerDto.middleName != ''">{{ucmCtrl.customerLogin.customerDto.middleName}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Last Name</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.customerDto.lastName}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Email</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.customerDto.email}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Contact</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.customerDto.contact}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Gender</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.customerDto.gender}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Customer Profile</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.customerDto.customerProfileDto.description}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Register Date</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.registeredDate | date: 'EEEE, MMMM d, y'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Login Information</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Attempt Count</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.attemptCount}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Is Active</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.isActive}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Is Blocked</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.is_blocked}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Last Logged In</label>
+              <div class="form-value">{{ucmCtrl.customerLogin.lastLoggedInTime | date: 'EEEE, MMMM d, y'}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

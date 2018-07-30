@@ -1,0 +1,123 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-message-plus"></i>
+    Create Message
+  </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  	<div class="row">
+      <div class="col-md-12">
+      <!-- Horizontal Form -->
+      	<div class="box">
+
+       
+	        <div class="box-body" ng-show="!msgCtrl.loaded">
+			  	<div class="loader-block">
+	            	<div class="loader"></div>
+	            	<p class="loader-text">Please wait...</p>
+	          	</div>
+			</div>
+
+	        <!-- /.box-header -->
+	        <div class="alert alert-danger" ng-show="msgCtrl.error">{{ msgCtrl.error_message }}</div>
+	        <div class="alert alert-success" ng-show="msgCtrl.success">{{ msgCtrl.success_message }}</div>
+
+		        <!-- form start -->
+		        <form ng-submit="msgCtrl.sendMessage()" name="message_form" class="form-horizontal" ng-show="msgCtrl.loaded">
+
+		          <div class="box-body">
+
+		          	<div class="form-group" ng-hide="true">
+		              <label for="type" class="col-sm-2 control-label">Type</label>
+
+		              <div class="col-sm-10">
+		                <label for="type" class="form-control">Message</label>
+		              </div>
+		            </div>
+
+	            	<div class="form-group">
+		              <label for="to" class="col-sm-3 control-label">Recipient</label>
+
+		              <div class="col-sm-5">
+		              	<select class="form-control" id="Recipient" name="Recipient" placeholder="Message to?" ng-model="msgCtrl.message.to" ng-change="msgCtrl.fetchProfile()" required >
+	                        <option value="" ng-disabled="msgCtrl.message.to.length > 0" >Select Recipient</option>
+	                        <option value="Admin">Admin</option>
+	                        <option value="Customer">Customer</option>
+	                        <option value="SettlementBank">Settlement Bank</option>
+	                        <option value="MemberBank">Member Bank</option>
+	                    </select>
+		              </div>
+		            </div>
+	            	<div class="form-group" ng-show="msgCtrl.profileLoaded && msgCtrl.receiverNotSettlement">
+		              <label for="type" class="col-sm-3 control-label">To</label>
+
+		              <div class="col-sm-8">
+			              <div class="radio custom-radio">
+			            	<label><input type="radio" name="messageType" ng-model="msgCtrl.message.messageType" value="ToAll" ng-change="msgCtrl.recipient()">To All<i class="radio-check-icon"></i></label>  	
+			              </div>
+			              <div class="radio custom-radio">
+			            	<label><input type="radio" name="messageType" ng-model="msgCtrl.message.messageType" value="To" ng-change="msgCtrl.recipient()">Specific Person<i class="radio-check-icon"></i></label>  	
+			              </div>
+			              <div class="radio custom-radio">
+			            	<label><input type="radio" name="messageType" ng-model="msgCtrl.message.messageType" value="Profile" ng-change="msgCtrl.recipient()">To Profile<i class="radio-check-icon"></i></label>  	
+			              </div>		              	
+		              </div>
+		            </div>
+
+	            	<!-- This profile is only shown when To is been selected as To any profile -->
+	                <div class="form-group" ng-show="msgCtrl.profileLoaded && msgCtrl.toProfile && msgCtrl.receiverNotSettlement">
+		              <label for="profile" class="col-sm-3 control-label">Profile</label>
+
+		              <div class="col-sm-5">
+
+						<ui-select ng-model="msgCtrl.message.belongId" ng-required="msgCtrl.toProfile">
+						    <ui-select-match placeholder="Select a profile">{{$select.selected.name}}</ui-select-match>
+						    <ui-select-choices repeat="profile.id as profile in msgCtrl.allProfiles | filter: {name: $select.search}">
+						        <span ng-bind="profile.name"></span>
+						    </ui-select-choices>
+						</ui-select>
+
+		              </div>
+		            </div>
+
+		            <!-- This profile is only shown when To is been selected as To specific person -->
+	                <div class="form-group" ng-show="msgCtrl.profileLoaded && msgCtrl.toSpecificPerson && msgCtrl.receiverNotSettlement">
+		              <label for="profile" class="col-sm-3 control-label">Person name</label>
+
+		              <div class="col-sm-5">
+						<!-- <input type="text" class="form-control" id="belongId" name="belongId" placeholder="Subject" ng-model="msgCtrl.message.belongId" autocomplete="off" maxlength="100" ng-required="msgCtrl.toSpecificPerson"> -->
+
+						<tags-input type="text" class="form-control multi-tag-form-control" id="username" name="username" placeholder="Username" ng-model="msgCtrl.message.username" display-property="username" add-from-autocomplete-only="true" debounce-delay="2000" maxlength="100" ng-required="msgCtrl.toSpecificPerson">
+
+							<auto-complete source="msgCtrl.fetchUsername($query, msgCtrl.message.to)"></auto-complete>
+						</tags-input>
+		              </div>
+		            </div>
+
+		            <hr ng-show="msgCtrl.profileLoaded"></hr>
+
+		            <div class="row" ng-show="msgCtrl.profileLoaded">
+		            	<div class="col-md-6 col-md-offset-3">
+			              <div class="form-group has-label-icon">
+			              	<input type="text" class="form-control big" id="subject" name="subject" placeholder="Subject" ng-model="msgCtrl.message.subject" autocomplete="off" maxlength="100" required>
+			                 <i class="label-icon mdi mdi-email"></i>
+			              </div>
+			            </div>
+		            </div>
+
+		            <div class="message-box-wrapper" ng-show="msgCtrl.profileLoaded">
+		            	<div class="message-box">
+							<div class="message-box" autocomplete="off" required text-angular ng-model="msgCtrl.message.message">
+			                </div>
+			                <!-- <textarea class="form-control" id="messageBody" name="messageBody" ng-model="msgCtrl.message.message" autocomplete="off" required>	</textarea> -->
+			              </div>
+			              <button type="submit" class="btn btn-footer btn-send pull-right" ng-disabled="message_form.$invalid"><i class="mdi mdi-send"></i>Send</button>
+		            </div>
+
+		        </form>
+        </div>
+      </div>
+  	</div>        
+</section>

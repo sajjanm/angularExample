@@ -1,0 +1,224 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Create Member Bank
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+      <div class="box box-info">
+
+        <div class="box-body" ng-show="!memberBankCtrl.formData">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <!-- /.box-header -->
+        <div class="alert alert-danger" ng-show="memberBankCtrl.error">{{ memberBankCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="memberBankCtrl.success">{{ memberBankCtrl.success_message }}</div>
+
+        <!-- form start -->
+        <form ng-submit="memberBankCtrl.createMemberBank(memberBank_form)" name="memberBank_form" class="form-horizontal" ng-show="memberBankCtrl.formData">
+
+         <div class="box-body">
+
+           <div class="form-group">
+             <label for="memberBank_name" class="col-sm-3 control-label required-field">Name</label>
+
+             <div class="col-md-5 has-required-validation">
+               <input type="text" class="form-control" id="memberBank_name" name="memberBank_name"ng-model="memberBankCtrl.memberBank.name" autocomplete="off" maxlength="50" ng-change="memberBankCtrl.clearValidationError('name')" required>
+
+               <div class ="required-validation">
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.memberBank_name.$valid) && !memberBankCtrl.validationError.name"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Name is required." ng-show="(memberBank_form.memberBank_name.$error.required || memberBank_form.memberBank_name.$error.length )&&(memberBank_form.memberBank_name.$dirty)"></i>
+                <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.name}}" ng-show="memberBankCtrl.validationError.name"></i> 
+              </div>
+            </div>
+          </div>
+
+          <!-- textarea -->
+          <div class="form-group">
+           <label for="description" class="col-sm-3 control-label required-field">Description</label>
+
+           <div class="col-md-5 has-required-validation">
+             <textarea style="resize: none" class="form-control" rows="3" id="description" name="description"ng-model="memberBankCtrl.memberBank.description" maxlength="250" ng-change="memberBankCtrl.clearValidationError('description')" required></textarea>
+             <div class ="required-validation">
+              <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.description.$valid) && !memberBankCtrl.validationError.description"></i> 
+              <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Description is required." ng-show="(memberBank_form.description.$error.required)&&(memberBank_form.description.$dirty)"></i>
+              <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.description}}" ng-show="memberBankCtrl.validationError.description"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group"> 
+          <label class="col-sm-3 control-label required-field" for="required-field">Email</label> 
+          <div class="col-md-5 has-required-validation">
+          <input type="text" class="form-control" id="email" name="email" ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' ng-model="memberBankCtrl.memberBank.email" autocomplete="off" maxlength="50" ng-change="memberBankCtrl.clearValidationError('email')" required>
+            <div class="required-validation"> 
+              <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.email.$valid) && !memberBankCtrl.validationError.email"></i> 
+              <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Email Address is not valid or required." ng-show="(memberBank_form.email.$error.required && memberBank_form.email.$dirty) || (memberBank_form.email.$error.pattern)"></i> 
+              <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{memberBankCtrl.validationError.email}}" ng-show="memberBankCtrl.validationError.email"></i> 
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+         <label for="text" class="col-sm-3 control-label required-field">Swift Code</label>
+
+         <div class="col-md-5 has-required-validation">
+           <input type="text" class="form-control" id="swiftCode" name="swiftCode" ng-model="memberBankCtrl.memberBank.swiftCode" maxlength="10" ng-change="memberBankCtrl.clearValidationError('swiftCode')" required>
+           <div class ="required-validation">
+            <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.swiftCode.$valid) && !memberBankCtrl.validationError.swiftCode"></i> 
+            <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Swift code is required and should be 10 characters long." ng-show="(memberBank_form.swiftCode.$error.required)&&(memberBank_form.swiftCode.$dirty)"></i>
+            <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.swiftCode}}" ng-show="memberBankCtrl.validationError.swiftCode"></i> 
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="mirrorAccountNumber" class="col-sm-3 control-label required-field">Mirror Account Number</label>
+
+        <div class="col-md-5 has-required-validation">
+          <input type="text" class="form-control" id="mirrorAccountNumber" name="mirrorAccountNumber" ng-model="memberBankCtrl.memberBank.mirrorAccountNumber" ng-pattern="/^[a-zA-Z0-9]{10,25}$/" maxlength="25" autocomplete="off" ng-change="memberBankCtrl.clearValidationError('mirrorAccountNumber')" required>
+          <div class ="required-validation">
+            <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.mirrorAccountNumber.$valid) && !memberBankCtrl.validationError.mirrorAccountNumber"></i>
+            <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Mirror Account Number is required and should be atleast 10 and not more than 25 character long." ng-show="(memberBank_form.mirrorAccountNumber.$error.required && memberBank_form.mirrorAccountNumber.$dirty) || (memberBank_form.mirrorAccountNumber.$error.pattern)"></i>
+            <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.mirrorAccountNumber}}" ng-show="memberBankCtrl.validationError.mirrorAccountNumber"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label for="accountNo" class="col-sm-3 control-label required-field">Account Number</label>
+
+       <div class="col-md-5 has-required-validation">
+         <input type="text" class="form-control" id="accountNo" name="accountNo" ng-model="memberBankCtrl.memberBank.accountNo" ng-pattern="/^[a-zA-Z0-9]{10,25}$/" maxlength="25" autocomplete="off" ng-change="memberBankCtrl.clearValidationError('accountNo')" required>
+
+         <div class ="required-validation">
+          <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.accountNo.$valid) && !memberBankCtrl.validationError.accountNo"></i> 
+          <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Account Number is required and should be atleast 10 and not more than 25 character long." ng-show="(memberBank_form.accountNo.$error.required && memberBank_form.accountNo.$dirty) || (memberBank_form.accountNo.$error.pattern)"></i>
+          <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.accountNo}}" ng-show="memberBankCtrl.validationError.accountNo"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+     <label for="username" class="col-sm-3 control-label required-field">Username</label>
+
+     <div class="col-md-5 has-required-validation">
+       <input type="text" class="form-control" id="username" name="username"ng-model="memberBankCtrl.memberBank.username" ng-minlength="5" ng-pattern="/^([a-zA-Z0-9_.@]){5,25}$/" autocomplete="off"  maxlength="25" ng-change="memberBankCtrl.clearValidationError('username')" required>
+       <div class ="required-validation">
+        <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.username.$valid) && !memberBankCtrl.validationError.username"></i> 
+        <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Username must be at least 5 character long alphanumerical and can contain (@, _ and .)." ng-show="(memberBank_form.username.$error.required && memberBank_form.username.$dirty) || (memberBank_form.username.$error.pattern)"></i>
+        <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.username}}" ng-show="memberBankCtrl.validationError.username"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+   <label for="memberBank_password" class="col-sm-3 control-label required-field">Password</label>
+
+   <div class="col-md-5 has-required-validation">
+     <input type="password" class="form-control" id="memberBank_password" name="memberBank_password"ng-model="memberBankCtrl.memberBank.password" ng-change="memberBankCtrl.validatePasswordPolicy(memberBankCtrl.memberBank.password)" ng-change="memberBankCtrl.clearValidationError('password')" required>
+     <div class="required-validation"> 
+      <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="memberBank_form.memberBank_password.$dirty && !(memberBankCtrl.pwdValidation.boolean)"></i>
+      <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="{{memberBankCtrl.pwdValidation.message}}" ng-show="(memberBank_form.memberBank_password.$error.required && memberBank_form.memberBank_password.$dirty) || (memberBankCtrl.pwdValidation.boolean)"></i>
+      <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.settlementBank_password}}" ng-show="memberBankCtrl.validationError.password"></i> 
+    </div>
+  </div>
+</div>            
+
+<div class="form-group">
+ <label for="confirm_password" class="col-sm-3 control-label required-field">Confirm Password</label>
+
+ <div class="col-md-5 has-required-validation">
+   <input type="password" class="form-control" id="confirm_password" name="confirm_password"ng-model="memberBankCtrl.confirm_password" ng-change="memberBankCtrl.clearValidationError('confirm_password')" required>
+   <div class ="required-validation">
+    <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="memberBank_form.memberBank_password.$dirty && (memberBankCtrl.confirm_password === memberBankCtrl.memberBank.password)"></i> 
+    <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Confirm password doesnot match" ng-show="(memberBankCtrl.confirm_password != memberBankCtrl.memberBank.password) && memberBank_form.confirm_password.$dirty && (memberBankCtrl.confirm_password.length > 0 || memberBankCtrl.memberBank.password.length > 0)"></i>
+  </div>
+</div>
+</div>
+
+<div class="form-group">
+  <label for="apiUserName" class="col-sm-3 control-label required-field">API User Name</label>
+
+  <div class="col-md-5 has-required-validation">
+    <input type="text" class="form-control" id="apiUserName" name="apiUserName" ng-model="memberBankCtrl.memberBank.apiUserName" ng-pattern="/^([a-zA-Z0-9\s_.@]){5,}$/" autocomplete="off" maxlength="25" ng-change="memberBankCtrl.clearValidationError('apiUserName')" required>
+
+    <div class ="required-validation">
+      <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.apiUserName.$valid) && !memberBankCtrl.validationError.apiUserName"></i> 
+      <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Api Username must be at least 5 character long alphanumerical and can contain (@, _ and .)." ng-show="(memberBank_form.apiUserName.$error.required && memberBank_form.apiUserName.$dirty) || (memberBank_form.apiUserName.$error.pattern)"></i>
+      <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.apiUserName}}" ng-show="memberBankCtrl.validationError.apiUserName"></i>
+    </div>
+  </div>                
+</div>
+
+<div class="form-group">
+  <label for="apiPassword" class="col-sm-3 control-label required-field">API Password</label>
+
+  <div class="col-md-5 has-required-validation">
+    <input type="password" class="form-control" id="apiPassword" name="apiPassword" ng-model="memberBankCtrl.memberBank.apiPassword" autocomplete="off" maxlength="20" ng-change="memberBankCtrl.clearValidationError('apiPassword')" required>
+
+
+    <div class ="required-validation">
+      <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.apiPassword.$valid) && !memberBankCtrl.validationError.apiPassword"></i> 
+      <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Api password is required." ng-show="(memberBank_form.apiPassword.$error.required || memberBank_form.apiPassword.$error.length )&&(memberBank_form.apiPassword.$dirty)"></i>
+      <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankCtrl.validationError.apiPassword}}" ng-show="memberBankCtrl.validationError.apiPassword"></i> 
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="apiUrl" class="col-sm-3 control-label required-field">API URL</label>
+
+  <div class="col-md-5 has-required-validation">
+    <input type="text" class="form-control" id="apiUrl" name="apiUrl" ng-model="memberBankCtrl.memberBank.apiUrl" ng-pattern="/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/" autocomplete="off" maxlength="2000" ng-change="memberBankCtrl.clearValidationError('apiUrl')" required>
+
+    <div class ="required-validation">
+      <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBank_form.apiUrl.$valid) && !memberBankCtrl.validationError.apiUrl"></i> 
+      <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Api url is required and should be valid url not more than 2000 characters long." ng-show="(memberBank_form.apiUrl.$error.required && memberBank_form.apiUrl.$dirty) || (memberBank_form.apiUrl.$error.pattern)"></i>
+      <i class="mdi mdi-close-circle validation-icon validation-error ng-hide" uib-tooltip="{{memberBankCtrl.validationError.apiUrl}}" ng-show="memberBankCtrl.validationError.apiUrl"></i>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="profile" class="col-sm-3 control-label required-field">Profile</label>
+
+  <div class="col-md-5">
+   <ui-select ng-model="memberBankCtrl.memberBank.profileId" ng-required="true">
+   <ui-select-match placeholder="Select a profile">{{$select.selected.name}}</ui-select-match>
+   <ui-select-choices repeat="profile.id as profile in memberBankCtrl.allMemberBankProfiles | filter: {name: $select.search}">
+   <span ng-bind="profile.name"></span>
+ </ui-select-choices>
+</ui-select>
+</div>
+<input type="button" ng-click="memberBankCtrl.profileDetailModal(memberBankCtrl.memberBank.profileId)" ng-if="!(memberBankCtrl.memberBank.profileId === undefined || memberBankCtrl.memberBank.profileId < 0)" class="btn btn-warning" value="Show Detail"/>
+</div>
+
+<div class="btn-block" ng-show="memberBankCtrl.formData">
+  <label class="col-sm-3 control-label"></label>
+  <div class="col-md-9">
+   <button type="submit" class="btn btn-primary" ng-disabled="memberBankCtrl.formValidation(memberBank_form)">Create</button>
+   <input type="button" ng-click="memberBankCtrl.resetForm(memberBank_form)" class="btn btn-default" value="Reset" />
+ </div>                
+</div>
+
+</div>
+<!-- /.box-body -->
+</form>
+</div>
+</div>
+<!-- /.box -->
+</div>        
+</section>
+<!-- /.content -->

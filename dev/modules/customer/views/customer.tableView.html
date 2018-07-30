@@ -1,0 +1,83 @@
+<section class="content-header">
+  <h1>
+    Verify Customer
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="alert alert-danger" ng-show="customerCtrl.error">{{ customerCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="customerCtrl.success">{{ customerCtrl.success_message }}</div>
+
+      <div class="box-body" ng-show="!customerCtrl.paginationLoaded" ng-hide="customerCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <div class="box-body">
+        <div class="table-minimal-2" ng-show="customerCtrl.paginationLoaded">                    
+          <table ng-table="customerCtrl.tableParams" class="table table-bordered">
+            <thead>
+              <tr>
+                <!-- <th>S.N</th> -->
+                <th>Name</th>
+                <th class="has-search-input">
+                  <button class="dropdown-toggle search" data-toggle="dropdown">
+                    <p class="title"><i class="mdi mdi-magnify"></i>Contact</p>
+                  </button>
+                  <div class="dropdown-menu">
+                    <input placeholder="Contact" type="text" class="form-control" ng-model="customerCtrl.tableParams.filter()['contact']">
+                  </div>
+                  <p ng-if="customerCtrl.tableParams.filter()['contact'].length > 0" class="filter-text">Filter by: {{customerCtrl.tableParams.filter()['contact']}}</p>
+                </th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Profile Status</th>
+                <th></th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-if="customerCtrl.allCustomerPagination.length > 0" ng-repeat="customerDto in customerCtrl.allCustomerPagination" ng-click="customerCtrl.detailModal(customerDto)">
+                  <!-- <td style="text-align: left">
+                    <span>{{$index+customerCtrl.sno}}</span>
+                  </td> -->
+                  <td>{{customerDto.firstName}} {{customerDto.middleName}} {{customerDto.lastName}}</td>
+                  <td>{{customerDto.contact}}</td>
+                  <td>{{customerDto.email}}</td>
+                  <td>{{customerDto.gender}}</td>
+                  <td>{{customerDto.statusDto.description}}</td>
+                  <td class="action-column">
+                    <a uib-tooltip="View Detail" ng-click="customerCtrl.editCustomer(customerDto); $event.stopPropagation();">
+                      <span class="mdi mdi-human" style="color:black;"></span>
+                    </a>
+                  </td>
+                </tr>
+                <tr ng-if="customerCtrl.allCustomerPagination.length == 0">
+                  <td colspan="7">
+                    <div class="box-main-icon no-records">
+                     <div class="image-holder">
+                      <img src="img/ic-no-record.png" alt="">                    
+                    </div>
+                    <span>No record(s) found</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<!-- /.content -->

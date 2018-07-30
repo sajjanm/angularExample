@@ -1,0 +1,193 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Create Invoice
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+	    <div class="col-md-12">
+	      	<!-- Horizontal Form -->
+	      	<div class="box">
+
+		    	<div class="box-body" ng-show="!invoiceCtrl.formData">
+		          <div class="loader-block">
+		            <div class="loader"></div>
+		            <p class="loader-text">Please wait...</p>
+		          </div>
+		        </div>
+
+		        <!-- /.box-header -->
+		        <div class="alert alert-danger" ng-show="invoiceCtrl.error">{{ invoiceCtrl.error_message }}</div>
+		        <div class="alert alert-success" ng-show="invoiceCtrl.success">{{ invoiceCtrl.success_message }}</div>
+
+		        <!-- form start -->
+		        <form ng-submit="invoiceCtrl.createInvoice(invoice_form)" id="invoice_form" name="invoice_form" class="form-horizontal" ng-show="invoiceCtrl.formData">
+
+		         	<div class="box-body">
+
+		         		<div class="form-block form-center">
+
+						    <div class="col-md-5">
+						      <div class="form-group has-required-validation">
+						        <label class="control-label col-md-12" for="senderName required-field">Sender name</label>
+						        <input type="text" name="senderName" class="form-control" id="senderName" ng-model="invoiceCtrl.invoice.senderName" autocomplete="off" maxlength="50" ng-change="invoiceCtrl.clearValidationError('senderName')" required>
+
+						        <div class="required-validation">
+						          	<i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(invoice_form.senderName.$valid) && !invoiceCtrl.validationError.senderName"></i> 
+					                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Name is required." ng-show="(invoice_form.senderName.$error.required)&&(invoice_form.senderName.$dirty)"></i> 
+					                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{invoiceCtrl.validationError.senderName}}" ng-show="invoiceCtrl.validationError.senderName"></i>
+						        </div>
+						      </div>
+						    </div>
+
+						    <div class="col-md-1">
+						    </div>
+
+						    <div class="col-md-6">
+						      <div class="form-group has-required-validation">
+						        <label class="control-label col-md-12" for="senderAddress required-field">Sender address</label>
+						        <input type="text" name="senderAddress" class="form-control" id="senderAddress" ng-model="invoiceCtrl.invoice.senderAddress" autocomplete="off" maxlength="50" ng-change="invoiceCtrl.clearValidationError('senderAddress')" required>
+
+						        <div class="required-validation">
+						          	<i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(invoice_form.senderAddress.$valid) && !invoiceCtrl.validationError.senderAddress"></i> 
+					                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Name is required." ng-show="(invoice_form.senderAddress.$error.required)&&(invoice_form.senderAddress.$dirty)"></i> 
+					                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{invoiceCtrl.validationError.senderAddress}}" ng-show="invoiceCtrl.validationError.senderAddress"></i>
+						        </div>
+						      </div>
+						    </div>
+
+			                <div class="col-md-12">
+						        <label class="control-label col-md-3" for="senderName required-field">Receiver</label>
+				              	<div class="col-sm-7">
+									<tags-input type="text" class="form-control multi-tag-form-control" id="username" name="username" placeholder="name" ng-model="invoiceCtrl.invoice.username" display-property="username" add-from-autocomplete-only="true" debounce-delay="2000" maxlength="1" enforce-max-tags="1">
+
+									<auto-complete source="invoiceCtrl.fetchInvoiceCustomerByUsername($query)"></auto-complete>
+									</tags-input>
+				             	</div>
+				            </div>
+
+						    <!-- <div class="col-md-5">
+						      <div class="form-group has-required-validation">
+						        <label class="control-label col-md-12" for="receiverName required-field">Receiver name</label>
+						        <input type="text" name="receiverName" class="form-control" id="receiverName" ng-model="invoiceCtrl.invoice.receiverName" autocomplete="off" maxlength="50" ng-change="invoiceCtrl.clearValidationError('receiverName')" required>
+
+						        <div class="required-validation">
+						          	<i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(invoice_form.receiverName.$valid) && !invoiceCtrl.validationError.receiverName"></i> 
+					                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Name is required." ng-show="(invoice_form.receiverName.$error.required)&&(invoice_form.receiverName.$dirty)"></i> 
+					                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{invoiceCtrl.validationError.receiverName}}" ng-show="invoiceCtrl.validationError.receiverName"></i>
+						        </div>
+						      </div>
+						    </div>
+						    
+						    <div class="col-md-1">
+						    </div>
+
+						    <div class="col-md-6">
+						      <div class="form-group has-required-validation">
+						        <label class="control-label col-md-12" for="receiverAddress required-field">Receiver Address</label>
+						        <input type="text" name="receiverAddress" class="form-control" id="receiverAddress" ng-model="invoiceCtrl.invoice.receiverAddress" autocomplete="off" maxlength="50" ng-change="invoiceCtrl.clearValidationError('receiverAddress')" required>
+
+						        <div class="required-validation">
+						          	<i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(invoice_form.receiverAddress.$valid) && !invoiceCtrl.validationError.receiverAddress"></i> 
+					                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="Name is required." ng-show="(invoice_form.receiverAddress.$error.required)&&(invoice_form.receiverAddress.$dirty)"></i> 
+					                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{invoiceCtrl.validationError.receiverAddress}}" ng-show="invoiceCtrl.validationError.receiverAddress"></i>
+						        </div>
+						      </div>
+						    </div> -->
+						</div>
+
+          				<ng-form name="invoiceDetail_form">
+				            <table class="table table-bordered-minimal">
+				              	<thead>
+					                <tr>
+					                  <th class="required-field">Item Name</th>
+					                  <th class="required-field">Quantity</th>
+					                  <th class="required-field">Price</th>
+					                  <th class="required-field">Total</th>
+					                  <th><!-- Remove Partner --></th>
+					                </tr>
+				              	</thead>
+				              	<tbody>
+					                <tr data-ng-repeat="invoiceDetail in invoiceCtrl.invoice.invoiceDetailArray">
+						                <td class="form-group">
+											<input class="form-control" type="text" id="{{invoiceDetail.id}}_itemName" name="itemName" placeholder="Enter Item Name" ng-model="invoiceDetail.itemName" maxlength="25" autocomplete="off" required>
+
+						                </td>
+						                <td class="form-group">
+						                    <input class="form-control" type="text" id="{{invoiceDetail.id}}_quantity" name="quantity" placeholder="Enter Quantity" ng-change="invoiceCtrl.getTotal($index)" only-floats ng-model="invoiceDetail.quantity" maxlength="6" autocomplete="off" required>
+						                </td>				                 
+						                <td class="form-group">
+						                    <input class="form-control" type="text" id="{{invoiceDetail.id}}_price" name="price" placeholder="Enter Price" ng-change="invoiceCtrl.getTotal($index)" only-floats ng-model="invoiceDetail.price" maxlength="6" autocomplete="off" required>
+						                </td>				                 
+						                <td class="form-group">
+						                	<input class="form-control" type="text" id="{{invoiceDetail.id}}_total" name="total"  ng-model="invoiceDetail.total" ng-disabled="true">
+						                    
+						                </td>
+						                <td class="action-column">
+						                    <a uib-tooltip="Remove Item" ng-click="invoiceCtrl.removePartner($index)">
+						                      <i class="mdi mdi-account-remove"></i>
+						                    </a>
+						                </td>
+					                </tr>
+			              	  	</tbody>     
+				            		
+				                <tr>
+				                	<td>
+										<div class="form-group"> 
+											<div class="col-sm-3"></div>
+								            <label class="col-sm-3 control-label required-field" for="gst required-field">GST</label> 
+								            <div class="col-md-5 has-required-validation">
+								              <input type="text" class="form-control" id="gst" name="gst" ng-model="invoiceCtrl.invoice.gst" autocomplete="on" maxlength="6" only-floats ng-change="invoiceCtrl.clearValidationError('gst')" required>
+								              <div class="required-validation"> 
+								                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(invoice_form.gst.$valid) && !invoiceCtrl.validationError.gst"></i> 
+								                <i class="mdi mdi-alert-circle validation-icon validation-alert " uib-tooltip="GST is required." ng-show="(invoice_form.gst.$error.required)&&(invoice_form.gst.$dirty)"></i> 
+								                <i class="mdi mdi-close-circle validation-icon validation-error " uib-tooltip="{{invoiceCtrl.validationError.gst}}" ng-show="invoiceCtrl.validationError.gst"></i> 
+								              </div>
+								            </div>
+								        </div>				                		
+				                	</td>
+				                </tr>				                
+				                <tr>
+				                	<td>
+										<div class="form-group"> 
+											<div class="col-sm-3"></div>
+								            <label class="col-sm-3 control-label" for="grandTotal">Grand Total</label> 
+								            <div class="col-md-5">
+								            	<label class="form-control" for="grandTotal">$ {{invoiceCtrl.gettingTotal()}}</label>
+								            </div>
+								        </div>	
+				                	</td>
+				                </tr>
+				            </table>
+	          	        </ng-form>      	                
+
+		    		</div>
+
+    		        <div class="btn-block">
+			            <div class="row">
+			              <div class="col-md-12 text-center">
+			                <button type="button" class="btn btn-hollow" ng-disabled="invoiceDetail_form.$invalid" ng-click="invoiceCtrl.addNewPartner()"><i class="mdi mdi-account-plus"></i>New Billing Item</button>
+			              </div>
+			            </div>  
+			        </div>
+
+			     	<div class="btn-block" ng-show="invoiceCtrl.formData">
+				        <label class="col-sm-3 control-label"></label>
+				        <div class="col-md-9">
+					        <button type="submit" class="btn btn-primary" ng-disabled="invoiceCtrl.formValidation(invoice_form)">Create</button>  
+					        <input type="button" ng-click="invoiceCtrl.resetForm(invoice_form)" class="btn btn-default" value="Reset" />
+				        </div>
+
+			    	</div>
+				</form>
+			</div>
+		</div>
+		<!-- /.box -->
+	</div>        
+</section>
+<!-- content -->

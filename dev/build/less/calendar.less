@@ -1,0 +1,399 @@
+.uib-datepicker-popup {
+    @main-header-padding-bottom: 10px;
+    background-color: @dark;
+    border: 0;
+    width: 320px;
+    outline: 0;
+    border-radius: 6px;
+    box-shadow: 0 17px 20px -10px rgba(0, 0, 0, 0.3);
+    padding: 20px 20px 10px 20px;
+    z-index: 100;
+    top: 85px !important;
+    left: 5% !important;
+    z-index: 999;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+
+    &:before{
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: -6px;
+        left: 100%;
+        margin-left: -50%;
+        content: '';
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+
+        border-bottom: 6px solid @dark;
+    }
+
+    * {
+        outline: 0;
+    }
+
+    .uib-daypicker{
+        padding: 5px 10px;
+    }
+
+    table{
+        width: 100%;
+    }
+
+    thead tr:nth-child(2) {
+        color: #999;
+        text-transform: uppercase;
+    }
+
+    thead{
+        th{
+            padding: 0;
+            .btn{
+                padding: 0;
+
+                &:hover{
+                    background-color: transparent;
+                    border-color: transparent; 
+                }
+
+                &:active{
+                    &:focus{
+                        background-color: transparent;
+                    }
+                }
+
+                &.uib-right, &.uib-left{
+                    color: @gray;
+                    font-size: 24px;
+                    &:hover{
+                        color: @text-light;
+                    }
+                    i{
+                        top: -8px;
+                        &:before{
+                            font-family: Material Design Icons;
+                        }
+                    }
+                }
+
+                &.uib-left{
+                    i{
+                        &:before{
+                            content: '\f04d';
+                        }    
+                    }
+                }
+
+                &.uib-right{
+                    i{
+                        &:before{
+                            content: '\f054';                        
+                        }
+                    }
+                }
+            }
+        }
+        .btn{
+            border: 0;
+            padding: 0;
+
+            &:hover{
+                border: 0;
+                // padding-bottom: 10px;
+
+            }
+        }
+    }
+
+    tbody tr:first-child td {
+        padding-top: @main-header-padding-bottom;
+    }
+
+    .btn.uib-title {
+        text-align: center;
+        width: 100%;
+        height: auto;
+        padding: 5px;
+        margin: 0;
+        color: @primary-pink;
+        padding-bottom: @main-header-padding-bottom;
+
+        &:hover {
+            color: lighten(@primary-pink, 10%);
+        }
+    }
+
+    .btn.uib-left, .btn.uib-right {
+        color: @primary-pink;
+        padding-bottom: @main-header-padding-bottom;
+
+        &:hover {
+            border: 0;
+            color: lighten(@primary-pink, 10%);
+        }
+    }
+
+    .btn {
+        background: initial;
+        border: 2px solid transparent;
+        min-width: initial;
+        padding: 0;
+        height: 28px;
+        width: 28px;
+        margin: 5px;
+        color: #FFF;
+        transition: all 0.25s ease-in-out;
+
+        &:hover {
+            // border: 2px solid @primary-pink;
+            border-color: transparent;
+            background-color: lighten(@dark, 10%);
+
+            
+        }
+
+        &.active {
+            box-shadow: none;
+            background-color: @primary-pink;
+            border-color: @primary-pink;
+
+            // &:hover {
+            //     border-color: lighten(@primary-pink, 15%);
+            //     background-color: lighten(@primary-pink, 15%);
+            // }
+            span {
+                color: #fff;
+            }
+        }
+
+        .text-info {
+            color: @primary-pink;
+        }
+
+        &[disabled]{
+            opacity: 0.25;
+            cursor: pointer;
+
+            &:hover {
+                background-color: transparent;
+                border-color: transparent;
+            }
+        }
+
+        span{
+            position: relative;
+            top: 1px;
+
+            &.sr-only{
+                display: none;
+            }
+        }
+    }
+
+    .uib-monthpicker {
+
+        tbody {
+            tr:first-child td {
+                padding-top: 0;
+            }
+
+            .btn {
+                font-weight: 500;
+
+                &:hover{
+                    border: 2px solid lighten(@dark, 2%);
+                    background-color: lighten(@dark, 2%);
+                }
+            }
+        }
+
+        .btn.uib-left, .btn.uib-right, .btn.uib-title {
+            padding-bottom: 0;
+        }
+
+        .uib-months .btn {
+            width: auto;
+            height: auto;
+            padding: 5px;
+
+            .text-info {
+                font-weight: 600;
+            }
+
+            &.active {
+                padding: 4px 9px;
+                font-weight: 600;
+
+                span {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.filter-area{
+    display: inline-block;
+}
+
+.date-picker-block{
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+    label{
+        display: inline-block;
+        color: @text-gray;
+        font-size: 11px;
+        margin-right: 8px;
+    }
+
+    .btn{
+        position: relative;
+        display: inline-block;
+        background-color: transparent;
+
+        i{
+            font-size: 16px;
+            color: @text-gray;
+        }
+
+        .icon-calendar{
+            background-color: #ee3070;
+            color: rgba(255, 255, 255, 0.9);
+            width: 36px;
+            height: 36px;
+            border-radius: 100px;
+            font-size: 18px;
+            text-align: center;
+            display: inline-block;
+            line-height: 38px;
+            margin-right: 6px;
+        }
+    }
+
+    .date-picker-date{
+        display: inline-block;
+        width: auto;
+        border: 0;
+        font-weight: 700;
+        font-size: 13px;
+
+    }
+}
+
+.date-range-picker-custom{
+
+    .date-range-picker-wrapper{
+        display: table;
+        // margin: 0 auto;
+        margin-bottom: 30px;
+
+        &.center{
+            margin: 0 auto;
+        }
+
+        .uib-datepicker-popup {
+            top: 75px !important;
+            left: -45% !important;
+        }
+    }
+
+    &.header{
+        .date-range-picker-wrapper{
+            margin-bottom: 0;
+        }
+    }
+    .form-group{
+        label{
+            font-size: 12px;
+            text-transform: uppercase;
+            color: @primary-green;
+            margin-bottom: 5px;
+            margin-right: 5px;
+            cursor: pointer;
+            display: inline-block;
+            width: auto;
+
+            .btn{
+                background: transparent;
+                padding: 0;
+                margin-right: 6px;
+
+                &:hover{
+                    color: inherit;
+                }
+            }
+        }
+
+        .input-holder{
+            display: inline-block;
+
+            i{
+                cursor: pointer;
+            }
+        }
+
+        .form-control{
+            font-size: 13px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        &.date-range-picker-group{
+            width: auto;
+            display: table-cell;
+            padding-top: 0;
+
+            .input-holder{
+                position: relative;
+
+                .uib-datepicker-popup {
+                    top: 50px !important;
+                }
+
+                > i{
+                    position: absolute;
+                    top: 5px;
+                    font-size: 18px;
+
+                    &.icon-calendar{
+                        left: 14px;
+                        color: @primary-green;
+                        cursor: pointer;
+                    }
+
+                    &.arrow-down{
+                        right: 14px;
+                        color: @text-secondary;
+                    }
+                }
+            }
+        }
+
+        &.date-range-seperator{
+            padding: 0 10px;
+            width: auto;
+
+            p{
+                display: block;
+                position: relative;
+                margin: 0 auto;
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                background-color: #b3beb9;
+                color: #FFF;
+                font-size: 10px;
+                font-weight: bold;
+                text-align: center;
+                text-transform: uppercase;
+                border-radius: 100px;
+            }
+        }
+
+        .input-group-floating-btn{
+            right: 10px;
+        }
+
+        
+    }
+}

@@ -1,0 +1,82 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Saved Invoice
+  </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+         
+      <div class="alert alert-danger" ng-show="invoiceCtrl.error">{{ invoiceCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="invoiceCtrl.success">{{ invoiceCtrl.success_message }}</div>
+
+      <div class="box-body" ng-show="!invoiceCtrl.paginationLoaded" ng-hide="invoiceCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <div class="table-minimal-2" ng-show="invoiceCtrl.paginationLoaded">      
+        <table ng-table="invoiceCtrl.tableParams" class="table filter-table">
+          <thead>
+            <tr>
+              <th class="has-search-input" width="300px;">
+                <button class="dropdown-toggle search" data-toggle="dropdown">
+                  <p class="title"><i class="mdi mdi-magnify"></i>Customer Name</p>
+                </button>
+                <div class="dropdown-menu">
+                  <input placeholder="Name" type="text" class="form-control" ng-model="invoiceCtrl.tableParams.filter()['name']">
+                </div>
+                <p ng-if="invoiceCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by: {{invoiceCtrl.tableParams.filter()['name']}}</p>
+              </th>
+              <th>Created Date</th>
+              <th>Total Bill Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-if="invoiceCtrl.allSavedInvoicesPagination.length" ng-repeat="savedInvoice in invoiceCtrl.allSavedInvoicesPagination" ng-click="invoiceCtrl.detailModal(savedInvoice)">
+            <!-- <td style="text-align: left" class="text-center">
+                <span>{{$index+invoiceCtrl.sno}}</span>
+            </td> -->
+              <td>{{savedInvoice.invoiceCustomer.name}}</td>
+              <td>{{savedInvoice.createdDate}}</td>
+              <td>{{savedInvoice.grandTotal}}</td>
+              <td class="action-column">
+                <a uib-tooltip="Send Email" ng-click="invoiceCtrl.sendEmail(savedInvoice.id); $event.stopPropagation();">
+                    <i class="mdi mdi-email"></i>
+                </a>
+                <a uib-tooltip="Edit Invoice" ng-click="invoiceCtrl.editAdmin(savedInvoice); $event.stopPropagation();">
+                    <i class="mdi mdi-pen"></i>
+                </a>
+                <a uib-tooltip="Delete Invoice" ng-click="invoiceCtrl.deleteModal(savedInvoice); $event.stopPropagation();">
+                    <i class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+            <tr ng-if="invoiceCtrl.paginationLoaded && invoiceCtrl.allSavedInvoicesPagination.length === 0">
+              <td colspan="5">
+                <div class="box-main-icon no-records">
+                   <div class="image-holder">
+                    <img src="img/ic-no-record.png" alt="">                    
+                   </div>
+                   <span>No record(s) found</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<!-- /.content -->

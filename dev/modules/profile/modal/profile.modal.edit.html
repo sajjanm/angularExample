@@ -1,0 +1,97 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Edit Profile Details</h3>
+  <button class="btn btn-close" type="button" ng-click="pmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+
+
+
+<div class="modal-body" id="modal-body">
+    
+  <form name="profileEdit_form">
+    <div class="box-body">
+      <div class="row">
+
+        <div class="form-block">
+          <div class="col-md-4"> 
+            <div class="form-group has-required-validation"> 
+              <label class="control-label" for="firstName required-field">Name</label> 
+              <input type="text" name="name" class="form-control" id="name" ng-model="pmCtrl.profileDetails.name" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(profileEdit_form.name.$valid)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert ng-hide" uib-tooltip="Name is required." ng-show=" (!profileEdit_form.name.$valid)"></i> 
+              </div> 
+            </div> 
+          </div>
+
+          <!-- <div class="col-md-4"> 
+            <div class="form-group has-required-validation"> 
+              <label class="control-label" for="firstName required-field">User Name</label> 
+              <input type="text" name="username" class="form-control" id="username" ng-pattern="/^([a-zA-Z0-9_.@]){5,}$/" ng-model="pmCtrl.profileDetails.username" required>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="!(profileEdit_form.username.$error.pattern)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert ng-hide" uib-tooltip="Username is required." ng-show="(profileEdit_form.username.$error.pattern)"></i> 
+              </div> 
+            </div> 
+          </div> -->
+
+          <div class="col-md-4"> 
+            <div class="form-group has-required-validation"> 
+              <label class="control-label" for="firstName required-field">Email</label> 
+              <input type="text" name="email" class="form-control" id="email" ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' ng-model="pmCtrl.profileDetails.email" ng-required="true"/>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="!(profileEdit_form.email.$error.pattern) && profileEdit_form.email.$valid"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert ng-hide" uib-tooltip="Email is required or not valid." ng-show="(profileEdit_form.email.$error.pattern) || !profileEdit_form.email.$valid"></i> 
+              </div> 
+            </div> 
+          </div>
+
+          <div class="col-md-4"> 
+            <div class="form-group has-required-validation"> 
+              <label class="control-label" for="firstName required-field">Phone Number</label> 
+              <input type="text" name="contact" class="form-email form-control" id="contact" ng-model="pmCtrl.profileDetails.contact" ng-pattern="/^[9][8|7]{1}[0|1|2|4|5|6]{1}[0-9]{7}$/" ng-minlength="10" ng-maxlength="10" autocomplete="off" ng-required="true" />
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(profileEdit_form.contact.$valid)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert ng-hide" uib-tooltip="Phone number is required or not valid." ng-show="(profileEdit_form.contact.$error.pattern) || (!profileEdit_form.contact.$valid)"></i> 
+              </div> 
+            </div> 
+          </div>
+
+          <!-- <div class="col-md-4"> 
+            <div class="form-group form-group select has-required-validation"> 
+              <label class="control-label" for="firstName required-field">Gender</label> 
+              <select class="form-control" id="gender" name="gender" placeholder="select gender" ng-model="pmCtrl.profileDetails.gender" required >
+                  <option value="" ng-disabled="pmCtrl.admin.gender.length > 0" >--select--</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+              </select>
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(profileEdit_form.gender.$valid)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert ng-hide" ng-show="(!profileEdit_form.gender.$valid)"></i> 
+              </div> 
+            </div> 
+          </div> -->
+
+          <div class="col-md-4"> 
+            <div class="form-group has-required-validation"> 
+              <label class="control-label" for="firstName required-field">Address</label> 
+              <input type="text" id="address" name="address"  class="form-control" ng-model="pmCtrl.profileDetails.address">
+              <div class="required-validation"> 
+                <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(profileEdit_form.address.$valid)"></i> 
+                <i class="mdi mdi-alert-circle validation-icon validation-alert ng-hide" uib-tooltip="Address is required." ng-show="(!profileEdit_form.address.$valid)"></i> 
+              </div> 
+            </div> 
+          </div>
+
+        </div>
+
+        
+      </div>
+      <div class="btn-block">
+        <button class="btn btn-primary" type="button" ng-disabled="profileEdit_form.$invalid" ng-click="pmCtrl.ok()">Update</button>
+      </div>
+    </div>
+    
+  </form>
+
+</div>

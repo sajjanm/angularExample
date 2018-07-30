@@ -1,0 +1,62 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-inbox"></i>
+    Inbox Messages
+  </h1>
+  <div class="header-search-box">      
+    <div class="form-group has-label-icon">
+        <input type="text" placeholder="Subject" class="form-control" ng-model="msgCtrl.tableParams.filter()['subject']">
+        <i class="label-icon mdi mdi-magnify"></i>
+    </div>
+  </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="alert alert-danger" ng-show="msgCtrl.error">{{ msgCtrl.error_message }}</div>
+  <div class="alert alert-success" ng-show="msgCtrl.success">{{ msgCtrl.success_message }}</div>
+
+   <div class="box-body" ng-show="!msgCtrl.paginationLoaded" ng-hide="msgCtrl.paginationLoaded">
+    <div class="loader-block">
+      <div class="loader"></div>
+      <p class="loader-text">Please wait...</p>
+    </div>
+  </div>
+
+  <div class="table-minimal-2" ng-show="msgCtrl.paginationLoaded">      
+    <table ng-table="msgCtrl.tableParams" class="table mailbox">
+      
+      <tr ng-if="msgCtrl.allMessages.length" ng-repeat="messageDetail in msgCtrl.allMessages" ng-click="msgCtrl.messageDetailView(messageDetail.messageId, messageDetail.messageMapId)">
+
+          <td>
+            <div class="user-detail-block">
+              <div class="bullet">
+                <i class="mdi mdi-checkbox-blank-circle"></i>
+              </div>
+              <div class="user-profile-image">
+                <img ng-src="{{messageDetail.senderImageLocation}}" alt="User Image">
+              </div>
+              <div class="user-profile-details">
+                <p class="subject">{{messageDetail.subject}}</p>
+                <p class="user-name">{{messageDetail.senderType}}</p>
+              </div>
+            </div>
+          </td>
+          <td class="timestamp"><i class="mdi mdi-calendar-clock"></i>{{messageDetail.createdDate | date: 'MMM dd, yyyy at h:mma'}}</td>
+          
+      </tr>
+      <tr class="no-records-block" ng-if="msgCtrl.paginationLoaded && msgCtrl.allMessages.length === 0">
+        <td colspan="5">
+          <div class="box-main-icon no-records">
+             <div class="image-holder">
+              <img src="img/ic-no-record.png" alt="">                    
+             </div>
+             <span>No record(s) found</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</section>

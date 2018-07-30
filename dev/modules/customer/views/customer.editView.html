@@ -1,0 +1,168 @@
+<section class="content-header">
+  <button class="btn btn-icon btn-back" type="button" ng-click="customerCtrl.cancel()"><i class="mdi mdi-arrow-left"></i></button>
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Upload KYC Detail
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+
+      <!-- form start -->
+      <form name="kycDetail_form">
+        <div class="box">
+          <div class="box-body">
+            <div class="box-section">
+              <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>User Information</h4>
+              <div class="box-section-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">First Name</label>
+                      <div class="form-value">{{customerCtrl.kycDto.firstName}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Middle Name</label>
+                      <div class="form-value">{{customerCtrl.kycDto.middleName}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Last Name</label>
+                      <div class="form-value">{{customerCtrl.kycDto.lastName}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Date of Birth</label>
+                      <div class="form-value">{{customerCtrl.kycDto.dob | date: 'EEEE, MMMM d, y'}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Gender</label>
+                      <div class="form-value">{{customerCtrl.kycDto.gender}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Occupation</label>
+                      <div class="form-value">{{customerCtrl.kycDto.occupation}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Father's Name</label>
+                      <div class="form-value">{{customerCtrl.kycDto.fathername}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Mother's Name</label>
+                      <div class="form-value">{{customerCtrl.kycDto.motherName}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Grand Father's Name</label>
+                      <div class="form-value">{{customerCtrl.kycDto.grandFatherName}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box-section">
+              <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Address</h4>
+              <div class="box-section-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Zone</label>
+                      <div class="form-value">{{customerCtrl.kycDto.zoneName}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">District</label>
+                      <div class="form-value">{{customerCtrl.kycDto.district}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">VDC/MUNICIPALITY</label>
+                      <div class="form-value">{{customerCtrl.kycDto.vdcMunicipality}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Tole</label>
+                      <div class="form-value">{{customerCtrl.kycDto.tole}}</div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+            <div class="box-section">
+              <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Documents</h4>
+              <div class="box-section-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Identification Number</label>
+                      <div class="form-value">{{customerCtrl.kycDto.identificationNumber}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Issued From</label>
+                      <div class="form-value">{{customerCtrl.kycDto.issuedFrom}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">Issued Date</label>
+                      <div class="form-value">{{customerCtrl.kycDto.issuedDate | date: 'EEEE, MMMM d, y'}}</div>
+                    </div>
+                  </div>  
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label has-value">List of file to download.</label>
+                      <div class="has-form-control-button">
+                        <select class="form-control" ng-model="customerCtrl.downloadFileId">
+                          <option ng-repeat="downloadfile in customerCtrl.kycDto.kycDocumentses" value="{{downloadfile.id}}">{{downloadfile.documentType}} </option>
+                        </select>
+                        <button class="btn btn-hollow" type="button" ng-click="customerCtrl.download()">Download</button>
+                      </div>
+                      
+                    </div>     
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="btn-block">
+          <!-- <button class="btn btn-primary" ng-show="customerCtrl.buttons" type="button" ng-click="customerCtrl.approve()">Approve</button>
+          <button class="btn btn-default" ng-show="customerCtrl.buttons" type="button" ng-click="customerCtrl.disapprove()">Disapprove</button> -->
+
+          <button class="btn btn-primary" type="button" ng-click="customerCtrl.approve()">Approve</button>
+          <button class="btn btn-default" type="button" ng-click="customerCtrl.disapprove()">Disapprove</button>
+        </div>
+        
+      </form>
+    </div>
+    <!-- /.box -->
+  </div>        
+</section>

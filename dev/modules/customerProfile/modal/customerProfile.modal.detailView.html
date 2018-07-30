@@ -1,0 +1,94 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Customer Profile Detail</h3>
+  <button class="btn btn-close" type="button" ng-click="cpmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+<div class="modal-body" id="modal-body">
+
+  <div class="box-body">
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Profile Detail</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Profile Name</label>
+            <div class="form-value">{{cpmCtrl.profile.name}}</div>
+          </div>
+
+          <!-- textarea -->
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Description</label>
+            <div class="form-value">{{cpmCtrl.profile.description}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Created By</label>
+            <div class="form-value">{{cpmCtrl.profile.createdBy.name}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Created Date</label>
+            <div class="form-value">{{cpmCtrl.profile.createdDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Modified By</label>
+            <div class="form-value">{{cpmCtrl.profile.modifiedBy.name}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label for="modifiedDate" class="control-label has-value">Modified Date</label>
+            <div class="form-value">{{cpmCtrl.profile.modifiedDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div> 
+
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Profile Roles</h4>
+      <div class="box-section-content">
+
+        <div class="role-block">
+          <div class="checkbox" ng-repeat="roles in cpmCtrl.profile.smartCardParentRoleResponses">
+
+            <div class="role-block-row">
+              <div class="col-md-12" ng-show="roles.isActive">
+                <div class="col-md-4 checkbox role-block-parent">
+                  <label>
+                    {{roles.uiGroupName}}
+                  </label>
+                </div>
+                <div class="col-md-8 checkbox role-block-child">
+                  <div class="col-md-4 role-block-child-element" ng-repeat="childRole in roles.childRoles" ng-show="childRole.isActive">
+                    <label>
+                      {{childRole.name}}
+                    </label>  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Profile Attributes</h4>
+      <div class="box-section-content">
+
+        <div class="row" ng-repeat="attributes in cpmCtrl.profile.customerProfileAttributeMapDtos">
+          <div class="form-group">
+            <label for="{{attributes.customerProfileAttributeDto.description}}" class="col-sm-4 control-label">{{attributes.customerProfileAttributeDto.description}}</label>
+            <div class="col-sm-6">
+              {{attributes.value}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

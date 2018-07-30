@@ -1,0 +1,62 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-send"></i>
+    Sent Messages
+  </h1>
+</section>
+
+<section class="content">
+  <div class="alert alert-danger" ng-show="msgCtrl.error">{{ msgCtrl.error_message }}</div>
+  <div class="alert alert-success" ng-show="msgCtrl.success">{{ msgCtrl.success_message }}</div>
+
+  <div class="box-body" ng-show="!msgCtrl.sentPaginationLoaded" ng-hide="msgCtrl.sentPaginationLoaded">
+    <div class="loader-block">
+      <div class="loader"></div>
+      <p class="loader-text">Please wait...</p>
+    </div>
+  </div>
+
+  <div class="table-minimal-2" ng-show="msgCtrl.sentPaginationLoaded">      
+      <table ng-table="msgCtrl.sentTableParams" class="table mailbox">
+       <!--  <tr>
+          <th>S.N</th>
+          <th>
+            <input type="text" placeholder="Subject" class="form-control" ng-model="msgCtrl.sentTableParams.filter()['subject']">
+          </th>
+          <th> Date </th>
+          <th> Sent To </th>
+        </tr> -->
+      <tr ng-if="msgCtrl.allSentMessages.length" ng-repeat="messageDetail in msgCtrl.allSentMessages" ng-click="msgCtrl.sentDetailView(messageDetail)">
+          <!-- <td style="text-align: left" class="text-center">
+              <span>{{$index+msgCtrl.sentSno}}</span>
+          </td> -->
+          <td>
+            <div class="user-detail-block">
+            <div class="bullet">
+              <i class="mdi mdi-checkbox-blank-circle"></i>
+            </div>
+            <div class="user-profile-image">
+              <img ng-src="{{messageDetail.senderImageLocation}}" alt="User Image"/>
+            </div>
+            <div class="user-profile-details">
+              <p class="subject">{{messageDetail.subject}} </p>
+              <p class="user-name">{{messageDetail.messageType}}</p>
+            </div>
+          </div>  
+          </td>
+          <td class="timestamp"><i class="mdi mdi-calendar-clock"></i>{{messageDetail.createdDate | date: 'MMM dd, yyyy at h:mma'}}</td>
+      </tr>
+      <tr class="no-records-block" ng-if="msgCtrl.sentPaginationLoaded && msgCtrl.allSentMessages.length === 0">
+        <td colspan="5">
+          <div class="box-main-icon no-records">
+             <div class="image-holder">
+              <img src="img/ic-no-record.png" alt="">                    
+             </div>
+             <span>No record(s) found</span>
+          </div>
+        </td>
+      </tr>
+      </table>
+    </div>
+
+</section>

@@ -1,0 +1,91 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Create MemberBank Profile
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-danger" ng-show="memberBankProfileCtrl.error">{{ memberBankProfileCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="memberBankProfileCtrl.success">{{ memberBankProfileCtrl.success_message }}</div>
+
+
+        <div class="box-body" ng-show="!memberBankProfileCtrl.formData">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <!-- form start -->
+        <form ng-submit="memberBankProfileCtrl.createProfile(memberBankProfile_form)" name="memberBankProfile_form" class="form-horizontal" ng-show="memberBankProfileCtrl.formData">
+        <div class="box">
+          <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-3 control-label required-field" for="profile_name">Profile Name</label> 
+
+              <div class="col-md-5 has-required-validation">
+                  <input type="text" class="form-control" id="profile_name" name="profile_name" placeholder="Profile Name" ng-model="memberBankProfileCtrl.profile.name" ng-pattern="/^([a-zA-Z0-9\s_.@]){5,}$/" autocomplete="off" maxlength="25" ng-change="memberBankProfileCtrl.clearValidationError('name')" required>
+                  <div class="required-validation"> 
+                    <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBankProfile_form.profile_name.$valid) && !memberBankProfileCtrl.validationError.name"></i> 
+                    <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Profile Name must be at least 5 character long alphanumerical and can contain (@, _ and .)" ng-show="(memberBankProfile_form.profile_name.$error.required && memberBankProfile_form.profile_name.$dirty) || (memberBankProfile_form.profile_name.$error.pattern)"></i> 
+                    <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankProfileCtrl.validationError.name}}" ng-show="memberBankProfileCtrl.validationError.name"></i> 
+                  </div>
+                </div>
+            </div>
+            
+            <!-- textarea -->
+            <div class="form-group"> 
+                <label class="col-sm-3 control-label required-field" for="description">Description</label> 
+                <div class="col-md-5 has-required-validation">
+                  <textarea style="resize: none" class="form-control" rows="3" id="description" name="description" placeholder="Description ..." ng-model="memberBankProfileCtrl.profile.description" maxlength="250" ng-change="memberBankProfileCtrl.clearValidationError('description')" required></textarea>
+                  <div class="required-validation"> 
+                    <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(memberBankProfile_form.description.$valid) && !memberBankProfileCtrl.validationError.description"></i> 
+                    <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Profile description is required" ng-show="(memberBankProfile_form.description.$error.required && memberBankProfile_form.description.$dirty)"></i> 
+                    <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{memberBankProfileCtrl.validationError.description}}" ng-show="memberBankProfileCtrl.validationError.description"></i> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="role-block">
+            <!-- <div class="form-group"> -->
+            <input name="flag" style="display: none;" type="checkbox" ng-model="memberBankProfileCtrl.roleChecked" required>
+            <h4 for="" class="col-sm-12">Profile Roles</h4>
+            <div class="row">
+              <div class="col-md-12" ng-repeat="roles in memberBankProfileCtrl.allMemberBankRoles">
+                  <div class="role-block-row">
+                      <div class="col-md-4 checkbox role-block-parent">
+                          <label>
+                            <input type="checkbox" ng-value="roles.serviceGroupRoleMapId" ng-model="roles.isActive" ng-click="memberBankProfileCtrl.parentRole(roles)" />
+                            {{roles.uiGroupName}}
+                          </label>
+                      </div>
+                      <div class="col-md-8 checkbox role-block-child">
+                          <div class="col-md-4 role-block-child-element" ng-repeat="childRole in roles.childRoles">
+                            <label>
+                              <input type="checkbox" ng-value="childRole.serviceGroupRoleMapId" ng-model="childRole.isActive" ng-click="memberBankProfileCtrl.childRole(childRole, roles)"/> 
+                              {{childRole.name}}
+                            </label>  
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+          
+         <div class="btn-block">
+            <button type="submit" class="btn btn-primary" ng-disabled="memberBankProfile_form.$invalid">Create</button>
+            <input type="button" ng-click="memberBankProfileCtrl.resetForm(memberBankProfile_form)" class="btn btn-default" value="Reset" />
+          </div>
+ 
+        </form>
+    </div>
+  </div>        
+</section>

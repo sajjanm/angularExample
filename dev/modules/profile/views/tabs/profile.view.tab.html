@@ -1,0 +1,82 @@
+<div class="alert alert-danger" ng-show="profileCtrl.error">{{ profileCtrl.error_message }}</div>
+<div class="alert alert-success" ng-show="profileCtrl.success">{{ profileCtrl.success_message }}</div>
+
+<div class="box-body" ng-show="!profileCtrl.loaded">
+  <div class="loader-block">
+    <div class="loader"></div>
+    <p class="loader-text">Please wait...</p>
+  </div>
+</div>
+
+<div class="box-body" ng-show="!profileCtrl.loaded">
+    <div class="box-main-icon no-records">
+      <div class="image-holder">
+        <img src="img/ic-no-record.png" alt="">                    
+      </div>
+      <span>No record(s) found</span>
+    </div>
+</div>
+
+
+  <!-- Your Page Content Here -->
+<div class="row">
+  <div class="col-md-4 text-center">
+    <div class="user-profile-block-wrapper" ng-show="profileCtrl.loaded">
+      <div class="user-profile-image-holder">
+        <button ng-show="profileCtrl.loaded" ng-click="profileCtrl.uploadPhoto()">
+          <img ng-src="{{profileCtrl.profilePhotoLocation}}" class="img-circle" alt="User Image">
+          <div class="upload-icon-popup"><i class="mdi mdi-camera"></i></div>
+        </button>
+      </div>
+      <div class="user-profile-information">
+        <div class="primary-name">{{profileCtrl.profileDetails.name}}</div>
+        <div class="secondary-details">
+          <span class="username">@{{profileCtrl.profileDetails.username}}</span>
+        </div>
+      </div>
+      <div class="btn-block">
+        <button class="btn btn-hollow btn-slim" type="button" ng-click="profileCtrl.editProfile()">Edit</button>        
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="row " ng-show="profileCtrl.loaded">
+      <div class="box-section">
+        <div class="box-section-content">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Email</label>
+              <div class="form-value" type="text" name="accountNo" id="accountNo">{{profileCtrl.profileDetails.email}}</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Contact</label>
+              <div class="form-value" type="text" name="swiftCode" id="swiftCode">{{profileCtrl.profileDetails.contact}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Gender</label>
+              <div class="form-value" type="text" name="apiUserName" id="apiUserName">{{profileCtrl.profileDetails.gender}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Address</label>
+              <div class="form-value" type="text" name="apiUrl" id="apiUrl">{{profileCtrl.profileDetails.address}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Assigned Admin Profile</label>
+              <div class="form-value" type="text" name="apiUrl" id="apiUrl">{{profileCtrl.profileDetails.adminProfile.description | lowercase}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

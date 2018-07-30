@@ -1,0 +1,74 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Admin Profile Detail</h3>
+  <button class="btn btn-close" type="button" ng-click="apmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+<div class="modal-body" id="modal-body">
+
+  <div class="box-body">
+    <div class="box-section" ng-show="apmCtrl.showBasicDetails">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Profile Information</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Profile Name</label>
+            <div class="form-value">{{apmCtrl.profileData.name}}</div>
+          </div>
+
+          <!-- textarea -->
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Description</label>
+            <div class="form-value">{{apmCtrl.profileData.description}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Created By</label>
+            <div class="form-value">{{apmCtrl.profileData.createdBy.name}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Created Date</label>
+            <div class="form-value">{{apmCtrl.profileData.createdDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Modified By</label>
+            <div class="form-value">{{apmCtrl.profileData.modifiedBy.name}}</div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Modified Date</label>
+            <div class="form-value">{{apmCtrl.profileData.modifiedDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+          </div>
+        </div> 
+      </div>
+    </div> 
+
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Profile Roles</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="role-block">
+            <div class="row">
+              <div class="col-md-12" ng-repeat="roles in apmCtrl.profile.smartCardParentRoleResponses">
+                <div class="role-block-row" ng-show="roles.isActive">
+                  <div class="col-md-4 checkbox role-block-parent">
+                    <label>
+                      {{roles.uiGroupName}}
+                    </label>
+                  </div>
+                  <div class="col-md-8 checkbox role-block-child">
+                    <div class="col-md-4 role-block-child-element" ng-repeat="childRole in roles.childRoles" ng-show="childRole.isActive">
+                      <label>
+                        {{childRole.name}}
+                      </label>  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

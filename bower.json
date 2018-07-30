@@ -1,0 +1,50 @@
+{
+  "name": "admin-app",
+  "homepage": "http://almsaeedstudio.com",
+  "dependencies": {
+    "angular": "1.5.8",
+    "bootstrap": "3.3.6",
+    "angular-animate": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "restangular": "~1.5.1",
+    "angular-bootstrap": "1.3.3",
+    "angular-ui-router": "0.3.1",
+    "angular-ui-select": "",
+    "ngstorage": "0.3.11",
+    "ng-table": "0.8.0",
+    "angular-recaptcha": "3.0.4",
+    "ng-file-upload" : "12.2.12",
+    "ng-img-crop" : "0.3.2",
+    "angular-file-saver" : "1.1.2",
+    "textAngular" : "1.5.16",
+    "ng-tags-input" : "3.1.1",
+    "angular-xeditable" : "0.7.0"
+  },
+  "devDependencies": {},
+  "authors": [
+    ""
+  ],
+  "description": "Admin dashboard and control panel template",
+  "main": [
+    "index.html"
+  ],
+  "keywords": [
+    "css",
+    "js",
+    "html",
+    "template",
+    "admin",
+    "bootstrap",
+    "theme",
+    "backend",
+    "responsive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "/.*",
+    "node_modules",
+    "bower_components",
+    "composer.json",
+    "documentation"
+  ]
+}

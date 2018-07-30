@@ -1,0 +1,114 @@
+<section class="content-header"> 
+  <h1>
+    <i class="mdi mdi-cards"></i>
+    Upload Scratch Card
+  </h1>
+  <div class="pull-right" ng-show="scratchCardCtrl.loaded">
+    <button class="btn btn-primary" ng-click="scratchCardCtrl.viewUploadExcelSheet(uploadExcelSheet_form)"><i class="mdi mdi-upload"></i>Upload Another File</button>  
+  </div>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here --> 
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="alert alert-danger" ng-show="scratchCardCtrl.error">{{ scratchCardCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="scratchCardCtrl.success">{{ scratchCardCtrl.success_message }}</div>
+
+      <!-- .box-body for Upload Excel File-->
+      <div class="box">
+        <div class="box-body" ng-show="!scratchCardCtrl.loaded">
+          <form method="post" name="uploadExcelSheet_form" ng-submit="scratchCardCtrl.fetchExcelDetails(uploadExcelSheet_form)" enctype="multipart/form-data">
+
+            <div class="form-group"> 
+              <div class="card-main-icon text-center">
+                <span>
+                  <img src="img/ic-upload-file.png" alt=" ">
+                </span>
+              </div>
+              <p class="card-main-paragraph">Upload the excel file.</p>
+
+              <p class="card-main-paragraph">{{scratchCardCtrl.excelFile.file.name}}</p>
+
+              <div class="upload-action col-md-12 text-center">
+               <input type="file" id="file-upload" class="input-type-file" ngf-select ng-model="scratchCardCtrl.excelFile.file" ngf-pattern="'.xls,.xlsx'" name="file" ngf-accept="'.xls,.xlsx'" required>
+                <button type="button" id="choose-file-button" class="btn btn-hollow">Choose File</button>
+              <div>
+              </div>
+                <button type="submit" class="btn btn-primary" name="upload_file" ng-disabled="uploadExcelSheet_form.$invalid">Upload File</button>  
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- .box-body for Upload Excel File-->
+      <div ng-show="scratchCardCtrl.loaded">
+        <form method="post" name="confirmUpload" ng-submit="scratchCardCtrl.uploadFile(confirmUpload)">
+          <div class="box">
+            <div class="box-body">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label required-field">Batch Name</label>
+                  <input type="text" maxlength="50" class="form-control" ng-model="scratchCardCtrl.batchName" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label required-field">Set Amount</label>
+                  <input type="text" maxlength="6" class="form-control" only-floats ng-model="scratchCardCtrl.scratchCardAmount" required>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label class="control-label required-field">Expiry Date</label>
+                <input class="form-control" type="text" name="expiryDate" ng-model="scratchCardCtrl.expiryDate" required id="expiryDate" uib-datepicker-popup="yyyy-MM-dd" ng-click="scratchCardCtrl.expiryDateOpen()" is-open="scratchCardCtrl.expiryDatePopup.opened" datepicker-options="scratchCardCtrl.expiryDateOptions" ng-required="true" show-button-bar="false" ng-readonly="true">
+                <span class="input-group-floating-btn">
+                  <button type="button" class="btn" ng-click="scratchCardCtrl.expiryDateOpen()"><i class="mdi mdi-calendar"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="table-minimal-2" ng-show="scratchCardCtrl.loaded">    
+            <table class="table filter-table">
+              <thead>
+                <tr>
+                  <th>S.No.</th>
+                  <th>Serial Numbers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="scratchCardDetail in scratchCardCtrl.scratchCardDetails.slice(((scratchCardCtrl.currentPage-1)*scratchCardCtrl.itemsPerPage), ((scratchCardCtrl.currentPage)*scratchCardCtrl.itemsPerPage))" >
+                  <td>{{scratchCardCtrl.itemsPerPage * (scratchCardCtrl.currentPage - 1) + $index + 1}}</td>
+                  <td>{{scratchCardDetail.serialNumber}}</td>
+                </tr>  
+              </tbody>
+            </table>             
+          </div>
+
+          <div class="pagination-has-button">
+            <div class="col-md-4 pull-left">
+              <button type="submit" name="upload_file" value="Upload File" class="btn btn-primary" ng-disabled="confirmUpload.$invalid">Confirm</button>
+            </div>               
+            <div class="col-md-8 pull-right">
+             <div class="ng-table-pager">
+              <ul uib-pagination boundary-links="true" items-per-page ="scratchCardCtrl.itemsPerPage" total-items="scratchCardCtrl.scratchCardDetails.length" ng-model="scratchCardCtrl.currentPage" class="pagination-sm" max-size="scratchCardCtrl.maxSize" ></ul>
+             </div> 
+            </div> 
+          </div>
+        </form>
+      </div>
+
+      <!-- /.box -->
+    </div>
+  </div>
+
+</section>
+<!-- /.content -->

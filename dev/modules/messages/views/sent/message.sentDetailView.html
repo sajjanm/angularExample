@@ -1,0 +1,48 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-send"></i>
+    Sent Message
+  </h1>
+</section>
+
+<section class="content">
+  <div class="alert alert-danger" ng-show="msgCtrl.error">{{ msgCtrl.error_message }}</div>
+  <div class="alert alert-success" ng-show="msgCtrl.success">{{ msgCtrl.success_message }}</div>
+
+  <div class="box inbox-section">
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="back-button">
+            <button class="btn btn-back" type="button" ng-click="msgCtrl.cancel()"><i class="mdi mdi-arrow-left"></i></button>
+          </div>
+          <div class="user-detail-block">
+            <div class="user-profile-image">
+              <img ng-src="{{msgCtrl.sentMessageDetail.senderImageLocation}}" alt="User Image">
+            </div>
+            <div class="user-profile-details">
+              <!-- <p class="user-name">{{messageDetail.senderType}}</p> -->
+              <p class="user-name">{{msgCtrl.sentMessageDetail.messageType}}</p>
+              <p class="timestamp"><i class ="mdi mdi-calendar-clock"></i>{{msgCtrl.sentMessageDetail.createdDate | date: 'MMM dd,yyyy at h:mma'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="view-message-block">
+            <h4 class="subject-title">{{msgCtrl.sentMessageDetail.subject}}</h4>              
+            <div>
+              <div class="message-box view-message" ng-model="msgCtrl.sentMessageDetail.message" autocomplete="off" text-angular ta-disabled="true" ta-toolbar-class="ng-hide">
+              </div>
+            </div>
+
+          </div>
+            
+        </div>
+      </div> 
+
+    </div>
+  </div>
+</section>

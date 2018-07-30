@@ -1,0 +1,109 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Create Commission Partner
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+      <div class="box">
+
+        <div class="box-body" ng-show="!commissionPartnerCtrl.loaded">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <!-- /.box-header -->
+        <div class="alert alert-danger" ng-show="commissionPartnerCtrl.error">{{ commissionPartnerCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="commissionPartnerCtrl.success">{{ commissionPartnerCtrl.success_message }}</div>
+
+        <!-- form start -->
+        <form ng-submit="commissionPartnerCtrl.createPartner(commissionPartner_form)" name="commissionPartner_form" class="form-horizontal" ng-show="commissionPartnerCtrl.loaded">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="partner_name" class="col-sm-3 control-label required-field">Partner Name</label>
+
+              <div class="col-md-5 has-required-validation">
+                <input type="text" class="form-control" id="partner_name" name="partner_name" ng-model="commissionPartnerCtrl.partner.name" autocomplete="off" ng-change="commissionPartnerCtrl.clearValidationError('name')" maxlength="50" required>
+                <div class ="required-validation">
+                  <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(commissionPartner_form.partner_name.$valid) && !commissionPartnerCtrl.validationError.name"></i>
+                  <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Name is required." ng-show="(commissionPartner_form.partner_name.$error.required)&&(commissionPartner_form.partner_name.$dirty)"></i>
+                  <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{commissionPartnerCtrl.validationError.name}}" ng-show="commissionPartnerCtrl.validationError.name"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="partner_organization_name" class="col-sm-3 control-label required-field">Partner Organization Name</label>
+
+              <div class="col-md-5 has-required-validation">
+                <input type="text" class="form-control" id="partner_organization_name" name="partner_organization_name" ng-model="commissionPartnerCtrl.partner.companyName" autocomplete="off" ng-change="commissionPartnerCtrl.clearValidationError('companyName')" maxlength="50" required>
+                <div class ="required-validation">
+                  <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(commissionPartner_form.partner_organization_name.$valid) && !commissionPartnerCtrl.validationError.companyName"></i>
+                  <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Organization Name is required." ng-show="(commissionPartner_form.partner_organization_name.$error.required)&&(commissionPartner_form.partner_organization_name.$dirty)"></i>
+                  <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{commissionPartnerCtrl.validationError.companyName}}" ng-show="commissionPartnerCtrl.validationError.companyName"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="accountNo" class="col-sm-3 control-label required-field">Account Number</label>
+
+              <div class="col-md-5 has-required-validation">
+                <input type="text" class="form-control" id="accountNo" name="accountNo" ng-model="commissionPartnerCtrl.partner.accountNo" ng-pattern="/^[a-zA-Z0-9]{10,25}$/" autocomplete="off" maxlength="10" ng-change="commissionPartnerCtrl.clearValidationError('accountNo')" required>
+                <div class ="required-validation">
+                  <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(commissionPartner_form.accountNo.$valid) && !commissionPartnerCtrl.validationError.accountNo"></i>
+                  <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Account number should be 10 to 25 character long and cannot contain special characters." ng-show="(commissionPartner_form.accountNo.$error.required && commissionPartner_form.accountNo.$dirty) || (commissionPartner_form.accountNo.$error.pattern)"></i>
+                  <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{commissionPartnerCtrl.validationError.accountNo}}" ng-show="commissionPartnerCtrl.validationError.accountNo"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="col-sm-3 control-label required-field">Email</label>
+
+              <div class="col-md-5 has-required-validation">
+                <input type="text" class="form-control" id="email" name="email" ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' ng-model="commissionPartnerCtrl.partner.email" autocomplete="off" maxlength="50" ng-change="commissionPartnerCtrl.clearValidationError('email')" required>
+                <div class ="required-validation">
+                  <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(commissionPartner_form.email.$valid) && !commissionPartnerCtrl.validationError.email"></i>
+                  <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Email Address is not valid or required." ng-show="(commissionPartner_form.email.$error.required && commissionPartner_form.email.$dirty) || (commissionPartner_form.email.$error.pattern)"></i>
+                  <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{commissionPartnerCtrl.validationError.email}}" ng-show="commissionPartnerCtrl.validationError.email"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact" class="col-sm-3 control-label required-field">Phone Number</label>
+
+              <div class="col-md-5 has-required-validation">
+                <input type="text" class="form-control" id="contact" name="contact" ng-model="commissionPartnerCtrl.partner.contact" ng-pattern="/^[9][8][0|1|2|4|5|6]{1}[0-9]{7}$/" autocomplete="off" maxlength="10" ng-change="commissionPartnerCtrl.clearValidationError('contact')" required>
+                <div class ="required-validation">
+                  <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(commissionPartner_form.contact.$valid) && !commissionPartnerCtrl.validationError.contact"></i>
+                  <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Phone number must contain 10 character or not valid." ng-show="(commissionPartner_form.contact.$error.required && commissionPartner_form.contact.$dirty) || (commissionPartner_form.contact.$error.pattern)"></i>
+                  <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{commissionPartnerCtrl.validationError.contact}}" ng-show="commissionPartnerCtrl.validationError.contact"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-block">
+              <label class="col-sm-3 control-label"></label>
+              <div class="col-md-9">
+                <button type="submit" class="btn btn-primary" ng-disabled="commissionPartner_form.$invalid">Create</button>  
+                <input type="button" ng-click="commissionPartnerCtrl.resetForm(commissionPartner_form)" class="btn btn-default" value="Reset" />
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>        
+</section>

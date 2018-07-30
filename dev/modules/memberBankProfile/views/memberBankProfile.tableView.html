@@ -1,0 +1,84 @@
+<section class="content-header">
+<h1>
+    <i class="mdi mdi-account-box"></i>
+    MemberBank Profile List
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+
+        <div class="alert alert-danger" ng-show="memberBankProfileCtrl.error">{{ memberBankProfileCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="memberBankProfileCtrl.success">{{ memberBankProfileCtrl.success_message }}</div>
+
+        <div class="box-body" ng-show="!memberBankProfileCtrl.paginationLoaded" ng-hide="memberBankProfileCtrl.paginationLoaded">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <div class="table-minimal-2" ng-show="memberBankProfileCtrl.paginationLoaded">
+          
+            <table ng-table="memberBankProfileCtrl.tableParams" class="table filter-table">
+              <thead>
+                <tr>
+                  <th class="has-search-input">
+                    <button class="dropdown-toggle search" data-toggle="dropdown">
+                      <p class="title"><i class="mdi mdi-magnify"></i>Name</p>
+                    </button>
+                    <div class="dropdown-menu">
+                      <input placeholder="Name" type="text" class="form-control" ng-model="memberBankProfileCtrl.tableParams.filter()['name']">
+                    </div>
+                  </th>
+                  <th>Description</th>
+                  <th class="has-select">
+                    <ui-select ng-model="memberBankProfileCtrl.tableParams.filter()['profileStatus']">
+                    <ui-select-match allow-clear="true" placeholder="Select a Profile status">{{$select.selected.description}}</ui-select-match>
+                    <ui-select-choices repeat="profileStatus.description as profileStatus in memberBankProfileCtrl.profileStatusList | filter: {description: $select.search}">
+                      <span ng-bind="profileStatus.description"></span>
+                    </ui-select-choices>
+                  </ui-select>
+                </th>
+                <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-if="memberBankProfileCtrl.allProfilePagination.length" ng-repeat="profiles in memberBankProfileCtrl.allProfilePagination" ng-click="memberBankProfileCtrl.detailModal(profiles)">
+                  <!-- <td>{{$index + memberBankProfileCtrl.sno}}</td> -->
+                  <td>{{profiles.name}}</td>
+                  <td>{{profiles.description}}</td>
+                  <td>{{profiles.profileStatus.description}}</td>
+                  <td class="action-column">
+                    <a uib-tooltip="Edit Profile" ng-click="memberBankProfileCtrl.editProfile(profiles); $event.stopPropagation();">
+                      <i class="mdi mdi-pen"></i>
+                    </a>
+                    <a uib-tooltip="Delete Profile" ng-click="memberBankProfileCtrl.deleteModal(profiles); $event.stopPropagation();">
+                      <i class="mdi mdi-delete"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr ng-if="memberBankProfileCtrl.paginationLoaded && memberBankProfileCtrl.allProfilePagination.length === 0">
+                  <td colspan="5">
+                    <div class="box-main-icon no-records">
+                       <div class="image-holder">
+                        <img src="img/ic-no-record.png" alt="">                    
+                       </div>
+                       <span>No record(s) found</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              
+          
+        </table>
+      </div>
+</div>
+</div>
+
+</section>

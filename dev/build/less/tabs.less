@@ -1,0 +1,75 @@
+.custom-tabs{
+	text-align: center;
+	padding: 10px 0 0px 0;
+	border-bottom: 1px solid #EEE;
+	background-color: #F7F7F7;
+	border-radius: @box-border-radius @box-border-radius 0 0;
+	.nav-tabs{
+		border-bottom: 0;
+		display: inline-block;
+		margin: 0 auto;
+		text-align: center;
+		position: relative;
+    	top: 4px;
+		> li{
+			> a{
+				font-family: @font-family-primary;
+				border-bottom: 3px solid transparent;
+				color: @icon-light;
+				text-transform: uppercase;
+			    font-weight: bold;
+			    font-size: 12px;
+			    border: 0;
+			    padding: 5px 15px 15px 15px;
+			    transition: color 0.25s cubic-bezier(0.32,1.25,0.375,1.15);
+
+			    &:hover{
+			    	border: 0;
+			    	background-color: transparent;
+			    	color: @icon-dark;
+			    }
+
+			    .icon-holder{
+			    	font-family: @font-family-icon;
+			        font-size: 20px;
+			        margin-right: 15px;
+			        font-style: normal;
+			        font-weight: normal;
+			    }
+
+			    .account-information{
+			    	.icon-holder{
+			    		&:before{
+			    			content: '\f631';
+			    		}
+			    	}
+			    }
+
+			    .change-password{
+			    	.icon-holder{
+			    		&:before{
+			    			content: '\f306';
+			    		}
+			    	}
+			    }
+
+			    .activity-log{
+			    	.icon-holder{
+			    		&:before{
+			    			content: '\f5c7';
+			    		}
+			    	}
+			    }
+			}
+
+			&.active{
+				> a{
+					border: 0;
+					border-bottom: 3px solid @primary-green;
+					color: @icon-dark;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+}

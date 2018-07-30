@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SFS Invoice Application | Admin Panel</title>
+	<link rel="icon" type="image/ico" href="img/favicon.ico">
+
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600" rel="stylesheet">
+
+<!-- build:css css/app.min.css -->
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	
+	<!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Poppins:400,500,600" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <!-- Material Design Icon Font -->
+        <link rel="stylesheet" href="css/materialdesignicons.css">
+	
+	<!-- Theme style -->
+	<link rel="stylesheet" href="css/skins/skin-default.min.css">
+
+	<!-- vendor css -->
+	<link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
+	<link rel="stylesheet" href="../bower_components/ng-table/dist/ng-table.min.css">
+
+	<!-- css for text angular -->
+	<link rel='stylesheet' href="../bower_components/textAngular/dist/textAngular.css">
+
+	<!-- css for ng tags input -->
+	<link rel="stylesheet" href="../bower_components/ng-tags-input/ng-tags-input.min.css">   
+
+    
+
+    <!-- for editable table -->
+    <link href="../bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/SmartCard.css">
+<!-- endbuild -->
+
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<style type="text/css">
+	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		display: none !important;
+	}
+</style>
+
+
+</head>
+
+<body class="hold-transition sidebar-mini ng-cloak fixed" ng-app='adminApp'>
+	<div ui-view>
+	</div>
+
+<!-- build:js js/vendor.min.js -->
+    <!-- JS scripts -->
+	<script src="../bower_components/jquery/dist/jquery.min.js" ></script>
+
+	<script src="../bower_components/angular/angular.min.js"></script>
+
+	<script src="../bower_components/ngstorage/ngStorage.min.js"></script>
+	<script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+	<script src="../bower_components/lodash/dist/lodash.min.js"></script>
+	<script src="../bower_components/restangular/dist/restangular.min.js"></script>
+
+	<script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+	<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="../bower_components/angular-ui-select/dist/select.min.js"></script>
+
+	<script src="../bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+	<script src="../bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+	<script src="../bower_components/angular-file-saver/dist/angular-file-saver.min.js"></script>
+	<script src="../bower_components/file-saver.js/FileSaver.js"></script>
+	<script src="../bower_components/blob-polyfill/Blob.js"></script>
+
+	<script src="../bower_components/ng-table/dist/ng-table.min.js"></script>
+	<script src="../bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+	<script src="../bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+
+	<script src="../bower_components/ng-table/dist/ng-table.min.js"></script>
+
+	<script src="../bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
+	<script src="../bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
+	<script src="../bower_components/textAngular/dist/textAngular.min.js"></script>
+
+	<script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+
+	<script src="../bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+
+	<!-- Bootstrap 3.3.6 -->
+	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+	<!-- AdminLTE App -->
+	<script src="js/jquery.slimscroll.min.js"></script>
+	<!--<script src="js/app.min.js"></script>-->
+	<script src="js/app.js"></script>
+<!-- endbuild -->	
+
+<!-- build:js js/app.min.js -->
+    <!-- angular JS scripts -->
+	<script src="app.module.js"></script>
+	<script src="app.run.js"></script>
+
+	<script src="factory/listener.service.js"></script>
+	<script src="factory/navigation.service.js"></script>
+	<script src="factory/pagination.service.js"></script>
+	<script src="factory/validation.service.js"></script>
+
+	<script src="directive/breadcrumb.directive.js"></script>
+	<script src="directive/onlyNumbers.directive.js"></script>
+	<script src="directive/onlyFloats.directive.js"></script>
+
+	<script src="filter/capitalize.filter.js"></script>
+	<script src="filter/trim.filter.js"></script>
+
+	<script src="modules/adminProfile/adminProfile.module.js"></script>
+	<script src="modules/adminProfile/service/adminProfile.service.js"></script>
+	<script src="modules/adminProfile/controller/adminProfile.controller.js"></script>
+	<script src="modules/adminProfile/modal/controller/adminProfile.modal.controller.js"></script>
+
+	<script src="modules/admin/admin.module.js"></script>
+	<script src="modules/admin/service/admin.service.js"></script>
+	<script src="modules/admin/controller/admin.controller.js"></script>
+	<script src="modules/admin/modal/controller/admin.modal.controller.js"></script>
+
+    <script src="modules/changePassword/changePassword.module.js"></script>
+    <script src="modules/changePassword/controller/changePassword.controller.js"></script>
+    <script src="modules/changePassword/service/changePassword.service.js"></script>
+
+	<script src="modules/customer/customer.module.js"></script>
+	<script src="modules/customer/controller/customer.controller.js"></script>
+	<script src="modules/customer/service/customer.service.js"></script>
+	<script src="modules/customer/modal/controller/customerVerify.modal.controller.js"></script>
+	<script src="modules/customer/modal/controller/unblockCustomer.modal.controller.js"></script>
+
+	<script src="modules/invoice/invoice.module.js"></script>
+	<script src="modules/invoice/service/invoice.service.js"></script>
+	<script src="modules/invoice/controller/invoice.controller.js"></script>
+	<script src="modules/invoice/controller/invoiceCustomer.controller.js"></script>
+	<!-- <script src="modules/invoice/modal/controller/invoice.modal.controller.js"></script> -->
+
+	<script src="modules/customerProfile/customerProfile.module.js"></script>
+	<script src="modules/customerProfile/service/customerProfile.service.js"></script>
+	<script src="modules/customerProfile/controller/customerProfile.controller.js"></script>
+	<script src="modules/customerProfile/modal/controller/customerProfile.modal.controller.js"></script>
+
+	<script src="modules/commissionSetup/commissionSetup.module.js"></script>
+	<script src="modules/commissionSetup/service/commission.service.js"></script>
+	<script src="modules/commissionSetup/controller/commission.controller.js"></script>
+	<script src="modules/commissionSetup/modal/controller/commission.modal.controller.js"></script>
+	<script src="modules/commissionSetup/service/commissionPartner.service.js"></script>
+	<script src="modules/commissionSetup/controller/commissionPartner.controller.js"></script>
+	<script src="modules/commissionSetup/modal/controller/commissionPartner.modal.controller.js"></script>
+	<script src="modules/commissionSetup/service/commissionSlab.service.js"></script>
+	<script src="modules/commissionSetup/controller/commissionSlab.controller.js"></script>
+	<script src="modules/commissionSetup/modal/controller/commissionSlab.modal.controller.js"></script>
+
+	<script src="modules/dashboard/controller/dashboard.controller.js"></script>
+
+	<script src="modules/login/login.module.js"></script>
+	<script src="modules/login/service/login.service.js"></script>
+	<script src="modules/login/controller/login.controller.js"></script>
+	<script src="modules/login/modal/controller/forgotYourPassword.modal.controller.js"></script>
+
+	<script src="modules/memberBank/memberBank.module.js"></script>
+	<script src="modules/memberBank/service/memberBank.service.js"></script>
+	<script src="modules/memberBank/controller/memberBank.controller.js"></script>
+	<script src="modules/memberBank/modal/controller/memberBank.modal.controller.js"></script>
+
+	<script src="modules/memberBankProfile/memberBankProfile.module.js"></script>
+	<script src="modules/memberBankProfile/service/memberBankProfile.service.js"></script>
+	<script src="modules/memberBankProfile/controller/memberBankProfile.controller.js"></script>
+	<script src="modules/memberBankProfile/modal/controller/memberBankProfile.modal.controller.js"></script>
+
+	<script src="modules/messages/message.module.js"></script>
+	<script src="modules/messages/service/message.service.js"></script>
+	<script src="modules/messages/controller/message.controller.js"></script>
+
+	<script src="modules/profile/profile.module.js"></script>
+	<script src="modules/profile/controller/profile.controller.js"></script>
+	<script src="modules/profile/service/profile.service.js"></script>
+	<script src="modules/profile/modal/controller/profile.modal.controller.js"></script>
+	<script src="modules/profile/modal/controller/profilePhoto.modal.controller.js"></script>
+
+	<script src="modules/profile/service/activityLog.service.js"></script>
+	<script src="modules/profile/controller/activityLog.controller.js"></script>
+
+	<script src="modules/applicationSetup/applicationSetup.module.js"></script>
+	<script src="modules/applicationSetup/controller/passwordPolicy.controller.js"></script>
+	<script src="modules/applicationSetup/service/passwordPolicy.service.js"></script>	
+	<script src="modules/applicationSetup/controller/metaTable.controller.js"></script>
+	<script src="modules/applicationSetup/service/metaTable.service.js"></script>	
+
+	<script src="modules/scratchCard/scratchCard.module.js"></script>
+	<script src="modules/scratchCard/controller/scratchCard.controller.js"></script>
+	<script src="modules/scratchCard/service/scratchCard.service.js"></script>
+
+	<script src="modules/settlementBank/settlementBank.module.js"></script>
+	<script src="modules/settlementBank/service/settlementBank.service.js"></script>
+	<script src="modules/settlementBank/controller/settlementBank.controller.js"></script>
+	<script src="modules/settlementBank/modal/controller/settlementBank.modal.controller.js"></script>
+
+	<script src="modules/settlementBankProfile/settlementBankProfile.module.js"></script>
+	<script src="modules/settlementBankProfile/service/settlementBankProfile.service.js"></script>
+	<script src="modules/settlementBankProfile/controller/settlementBankProfile.controller.js"></script>
+	<script src="modules/settlementBankProfile/modal/controller/settlementBankProfile.modal.controller.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

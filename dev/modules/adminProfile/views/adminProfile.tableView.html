@@ -1,0 +1,75 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Admin Profile List
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-12">
+       
+        <div class="alert alert-danger" ng-show="adminProfileCtrl.error">{{ adminProfileCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="adminProfileCtrl.success">{{ adminProfileCtrl.success_message }}</div>
+
+        <div class="box-body" ng-show="!adminProfileCtrl.paginationLoaded" ng-hide="adminProfileCtrl.paginationLoaded">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <div class="table-minimal-2" ng-show="adminProfileCtrl.paginationLoaded">                    
+          <table ng-table="adminProfileCtrl.tableParams" class="table filter-table">
+            <thead>
+              <tr>
+                <th class="has-search-input" style="width: 200px">
+                  <button class="dropdown-toggle search" data-toggle="dropdown">
+                    <p class="title"><i class="mdi mdi-magnify"></i>Name</p>
+                  </button>
+                  <div class="dropdown-menu">
+                    <input placeholder="Name" type="text" class="form-control" ng-model="adminProfileCtrl.tableParams.filter()['name']">
+                  </div>
+                  <p ng-if="adminProfileCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by: {{adminProfileCtrl.tableParams.filter()['name']}}</p>
+                </th>
+                <th style="width: 200px">Description</th>
+                <th style="width: 200px">Profile Status</th>
+                <th></th>
+              </tr>  
+            </thead>
+            <tbody>
+              <tr ng-if="adminProfileCtrl.allAdminProfilesPagination.length" ng-repeat="adminProfile in adminProfileCtrl.allAdminProfilesPagination" ng-click="adminProfileCtrl.detailModal(adminProfile)">
+                <!-- <td style="text-align: left" class="text-center">
+                  <span>{{$index+adminProfileCtrl.sno}}</span>
+                </td> -->
+                <td>{{adminProfile.name}}</td>
+                <td>{{adminProfile.description}}</td>
+                <td>{{adminProfile.profileStatus.description}}</td>
+                <td class="action-column">
+                  <a uib-tooltip="Edit Profile" ng-click="adminProfileCtrl.editProfile(adminProfile); $event.stopPropagation();">
+                    <i class="mdi mdi-pen"></i>
+                  </a>
+                  <a uib-tooltip="Delete Profile" ng-click="adminProfileCtrl.deleteModal(adminProfile); $event.stopPropagation();">
+                    <i class="mdi mdi-delete"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr ng-if="adminProfileCtrl.paginationLoaded && adminProfileCtrl.allAdminProfilesPagination.length === 0">
+                <td colspan="5">
+                  <div class="box-main-icon no-records">
+                     <div class="image-holder">
+                      <img src="img/ic-no-record.png" alt="">                    
+                     </div>
+                     <span>No record(s) found</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+
+</section>

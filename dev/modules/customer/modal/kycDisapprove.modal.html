@@ -1,0 +1,26 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Disapprove KYC</h3>
+	<button class="btn btn-close" type="button" ng-click="cmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+
+<div class="modal-body" id="modal-body">
+	<form name="approveKyc_form" class="form-horizontal">
+
+		<div class="box-body">
+			<div class="box-section">
+				<div class="box-section-content">
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="control-label has-value">Disapprove Reason</label>
+							<textarea style="resize: none" class="form-control" rows="3" id="disapprove_reasons" name="disapprove_reasons" placeholder="Disapprove Reason ..." ng-model="cmCtrl.kycData.disapproveReason" maxlength="250" required></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="btn-block">
+				<button class="btn btn-primary" type="button" ng-click="cmCtrl.ok()" ng-disabled="approveKyc_form.$invalid">Disapprove</button>
+			</div>
+		</div>  
+	</form>
+</div>

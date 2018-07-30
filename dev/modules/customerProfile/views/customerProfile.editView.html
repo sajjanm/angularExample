@@ -1,0 +1,97 @@
+<section class="content-header">
+  <button class="btn btn-icon btn-back" type="button" ng-click="customerProfileCtrl.cancelUpdate()"><i class="mdi mdi-arrow-left"></i></button>
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Customer Profile Setup
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+
+      <div class="box-body" ng-show="!customerProfileCtrl.formData">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <form ng-submit="customerProfileCtrl.updateProfile(customerProfile_form)" name="customerProfile_form" class="form-horizontal"  ng-if="customerProfileCtrl.formData">
+
+        <div class="box">
+          <div class="box-body">
+
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label required-field">Profile Name</label>
+              <div class="col-md-5 form-value">{{customerProfileCtrl.profile.name}}</div>
+            </div>
+
+            <!-- textarea -->
+            <div class="form-group">
+              <label for="description" class="col-sm-3 control-label required-field">Description</label>
+              <div class="col-md-5 has-required-validation">
+                <textarea style="resize: none" class="form-control" rows="3" id="description" name="description" placeholder="Description ..." ng-model="customerProfileCtrl.profile.description" maxlength="250" ng-change="customerProfileCtrl.clearValidationError('description')" required></textarea>
+                <div class ="required-validation">
+                  <i class="mdi mdi-check-circle validation-icon validation-success" ng-show="(customerProfile_form.description.$valid) && !customerProfileCtrl.validationError.description"></i>
+                  <i class="mdi mdi-alert-circle validation-icon validation-alert" uib-tooltip="Profile description is required" ng-show="(customerProfile_form.description.$error.required && customerProfile_form.description.$dirty)"></i>
+                  <i class="mdi mdi-close-circle validation-icon validation-error" uib-tooltip="{{customerProfileCtrl.validationError.description}}" ng-show="customerProfileCtrl.validationError.description"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="role-block">
+          <input style="display: none;" type="checkbox" ng-model="customerProfileCtrl.roleChecked" required>
+          <h4 for="" class="col-sm-12">Profile Roles</h4>
+          <div class="checkbox" ng-repeat="roles in customerProfileCtrl.profile.smartCardParentRoleResponses">
+
+            <div class="role-block-row">
+              <div class="col-md-12">
+                <div class="col-md-4 checkbox role-block-parent">
+                  <label>
+                    <input type="checkbox" ng-value="roles.serviceGroupRoleMapId" ng-model="roles.isActive" ng-click="customerProfileCtrl.parentRole(roles)" />
+                    {{roles.uiGroupName}}
+                  </label>
+                </div>
+                <div class="col-md-8 checkbox role-block-child">
+                  <div class="col-md-4 role-block-child-element" ng-repeat="childRole in roles.childRoles">
+                    <label>
+                      <input type="checkbox" ng-value="childRole.serviceGroupRoleMapId" ng-model="childRole.isActive" ng-click="customerProfileCtrl.childRole(childRole, roles)"/> 
+                      {{childRole.name}}
+                    </label>  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="role-block-edit">
+          <h3 class="box-subheader">Profile Attributes</h3>
+
+          <div class="row" ng-repeat="attributes in customerProfileCtrl.profile.customerProfileAttributeMapDtos">
+            <div class="form-group">
+              <label for="{{attributes.customerProfileAttributeDto.description}}" class="col-sm-4 control-label required-field">{{attributes.customerProfileAttributeDto.description}}</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="{{attributes.customerProfileAttributeDto.name}}" name="{{attributes.customerProfileAttributeDto.name}}" placeholder="{{attributes.customerProfileAttributeDto.description}}" ng-model="attributes.value" only-floats required>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+        <div class="btn-block">
+          <button type="submit" class="btn btn-primary" ng-disabled="customerProfile_form.$invalid">Update</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>        
+</section>
+<!-- /.content -->

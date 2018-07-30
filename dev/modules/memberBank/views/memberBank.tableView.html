@@ -1,0 +1,98 @@
+<section class="content-header">
+
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Edit Member Banks
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+        
+        <!-- /.box-header -->
+        <div class="alert alert-danger" ng-show="memberBankCtrl.error">{{ memberBankCtrl.error_message}}</div>
+        <div class="alert alert-success" ng-show="memberBankCtrl.success">{{ memberBankCtrl.success_message}}</div>
+
+        <div class="box-body" ng-show="!memberBankCtrl.paginationLoaded" ng-hide="memberBankCtrl.paginationLoaded">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+          <div class="table-minimal-2" ng-show="memberBankCtrl.paginationLoaded">                    
+            <table ng-table="memberBankCtrl.tableParams" class="table filter-table">
+              <thead>
+                <tr>
+                  <!-- <th>S.N</th> -->
+                  <th class="has-search-input">
+                    <button class="dropdown-toggle search" data-toggle="dropdown">
+                      <p class="title"><i class="mdi mdi-magnify"></i>Name</p>
+                    </button>
+                    <div class="dropdown-menu">
+                      <input placeholder="Name" type="text" class="form-control" ng-model="memberBankCtrl.tableParams.filter()['name']">
+                    </div>
+                    <p ng-if="memberBankCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by: {{memberBankCtrl.tableParams.filter()['name']}}</p>
+                  </th>
+                  <th>Mirror Account No</th>
+                  <th>Account No</th>
+                  <th class="has-search-input">
+                    <button class="dropdown-toggle search" data-toggle="dropdown">
+                      <p class="title"><i class="mdi mdi-magnify"></i>Username</p>
+                    </button>
+                    <div class="dropdown-menu">
+                      <input placeholder="Username" type="text" class="form-control" ng-model="memberBankCtrl.tableParams.filter()['username']">
+                    </div>
+                    <p ng-if="memberBankCtrl.tableParams.filter()['username'].length > 0" class="filter-text">Filter by: {{memberBankCtrl.tableParams.filter()['username']}}</p>
+                  </th>
+                  <th class="has-select">
+                      <!-- <span class="table-title">Status</span> -->
+                      <!-- <input type="text" placeholder="Transaction Status" class="form-control" ng-model="transactionMangCtrl.tableParams.filter()['statusName']"> -->
+                      <!-- Transaction Status -->
+                      <ui-select ng-model="memberBankCtrl.tableParams.filter()['profile']">
+                          <ui-select-match allow-clear="true" placeholder="Profile">{{$select.selected.name}}</ui-select-match>
+                          <ui-select-choices repeat="profile.name as profile in memberBankCtrl.allMemberBankProfiles | filter: {name: $select.search}">
+                              <span ng-bind="profile.name"></span>
+                          </ui-select-choices>
+                      </ui-select>
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>  
+              <tbody>
+                <tr ng-if="memberBankCtrl.allMemberBanksPagination.length" ng-repeat="memberBanks in memberBankCtrl.allMemberBanksPagination" ng-click="memberBankCtrl.detailModal(memberBanks)">
+                  <!--                 <td style="text-align: left" class="text-center">
+                    <span>{{$index + memberBankCtrl.sno}}</span>
+                  </td> -->
+                  <td>{{memberBanks.name}}</td>
+                  <td>{{memberBanks.mirrorAccountNumber}}</td>
+                  <td>{{memberBanks.accountNo}}</td>
+                  <td>{{memberBanks.username}}</td>
+                  <td>{{memberBanks.memberBankProfileDto.name}}</td>
+                  <td class="action-column">
+                    <a uib-tooltip="Edit Bank" ng-click="memberBankCtrl.editMemberBank(memberBanks); $event.stopPropagation();">
+                      <i class="mdi mdi-pen"></i>
+                    </a>
+                    <a uib-tooltip="Delete Bank" ng-click="memberBankCtrl.deleteModal(memberBanks); $event.stopPropagation();">
+                      <i class="mdi mdi-delete"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr ng-if="memberBankCtrl.paginationLoaded && memberBankCtrl.allMemberBanksPagination.length === 0">
+                  <td colspan="6">No records found.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        <!-- /.box -->
+    </div>
+  </div>
+
+</section>

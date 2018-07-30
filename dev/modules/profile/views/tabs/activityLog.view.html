@@ -1,0 +1,75 @@
+ <!-- filter for table -->
+<div class="date-range-picker-custom header">
+    <div class="date-range-picker-wrapper">
+        <div class="form-group date-range-picker-group text-center">
+          <div class="input-holder">
+            <i class="mdi mdi-calendar icon-calendar" uib-tooltip="From Date" ng-click="statCtrl.fromDateOpen()"></i>
+            <input class="form-control text-center" type="text" name="fromDate" ng-model="activityLogCtrl.tableParams.filter()['fromDate']" required id="fromDate" uib-datepicker-popup="yyyy-MM-dd" ng-click="activityLogCtrl.fromDateOpen()" is-open="activityLogCtrl.fromDatePopup.opened" datepicker-options="activityLogCtrl.fromDateOptions" ng-required="true" show-button-bar="false" ng-readonly="true">                      
+            <i class="mdi mdi-chevron-down arrow-down" ng-click="activityLogCtrl.fromDateOpen()"></i>  
+          </div>
+        </div>
+        <div class="form-group date-range-seperator date-range-picker-group">
+          <p>To</p>
+        </div>
+        <div class="form-group date-range-picker-group text-center">
+          <div class="input-holder">
+            <i class="mdi mdi-calendar icon-calendar" uib-tooltip="To Date" ng-click="statCtrl.toDateOpen()"></i>
+            <input class="form-control text-center" type="text" name="toDate" ng-model="activityLogCtrl.tableParams.filter()['toDate']" required id="toDate" uib-datepicker-popup="yyyy-MM-dd" ng-click="activityLogCtrl.toDateOpen()" is-open="activityLogCtrl.toDatePopup.opened" datepicker-options="activityLogCtrl.toDateOptions" ng-required="true" show-button-bar="false" ng-readonly="true">            
+            <i class="mdi mdi-chevron-down arrow-down" ng-click="activityLogCtrl.toDateOpen()"></i>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- end of filter table -->
+
+
+  <div class="box-body" ng-show="!activityLogCtrl.paginationLoaded" ng-hide="activityLogCtrl.paginationLoaded">
+    <div class="loader-block">
+      <div class="loader"></div>
+      <p class="loader-text">Please wait...</p>
+    </div>
+  </div>
+
+<div ng-show="activityLogCtrl.paginationLoaded">                    
+  <table ng-table="activityLogCtrl.tableParams" class="table table-bordered-minimal">
+    <thead>
+      <tr>
+        <!-- <th>S.N</th> -->
+        <th style="width: 400px">Activity Date/Time</th>
+        <th class="has-search-input">
+          <span>Description</span>
+          <button class="dropdown-toggle search" data-toggle="dropdown"><i class="mdi mdi-magnify"></i></button>
+          <div class="dropdown-menu">
+            <input type="text" placeholder="Description" class="form-control" ng-model="activityLogCtrl.tableParams.filter()['description']">
+          </div>
+          <span ng-if="activityLogCtrl.tableParams.filter()['description'].length > 0" class="filter-text">Filter by: {{activityLogCtrl.tableParams.filter()['description']}}</span>
+        </th>
+        <th>
+          
+        </th>
+      </tr>  
+    </thead>
+    <tbody>
+      <tr ng-if="activityLogCtrl.allActivityLogsPagination.length" ng-repeat="activity in activityLogCtrl.allActivityLogsPagination">
+        <!-- <td style="text-align: left" class="text-center">
+            <span>{{$index+activityLogCtrl.sno}}</span>
+        </td> -->
+        <td><span class="date">{{activity.date | date:'EEEE, MMMM d'}}</span> at <span>{{activity.date | date:'h:mm:ss a'}}</span></td>
+        <td>{{activity.description}}</td>
+      </tr>
+      <tr ng-if="activityLogCtrl.paginationLoaded && activityLogCtrl.allActivityLogsPagination.length === 0">
+        <td colspan="3" class="box-main-icon-wrapper">
+          <div class="box-main-icon no-records">
+            <div class="image-holder">
+              <img src="img/ic-no-record.png" alt="">                    
+            </div>
+            <span>No record(s) found</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+

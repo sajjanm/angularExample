@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Commission Partner Details</h3>
+  <button class="btn btn-close" type="button" ng-click="cpmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+<div class="modal-body" id="modal-body">
+
+  <div class="box-body">
+    <div class="box-section">
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Partner Name</label>
+              <div class="form-value">{{cpmCtrl.partnerData.name}}</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Partner Organization Name</label>
+              <div class="form-value">{{cpmCtrl.partnerData.companyName}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Account Number</label>
+              <div class="form-value">{{cpmCtrl.partnerData.accountNo}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Email</label>
+              <div class="form-value">{{cpmCtrl.partnerData.email}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Phone Number</label>
+              <div class="form-value">{{cpmCtrl.partnerData.contact}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Created By</label>
+              <div class="form-value">{{cpmCtrl.partnerData.createdBy.name}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Created Date</label>
+              <div class="form-value">{{cpmCtrl.partnerData.createdDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Modified By</label>
+              <div class="form-value">{{cpmCtrl.partnerData.modifiedBy.name}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="modifiedDate" class="control-label has-value">Modified Date</label>
+              <div class="form-value">{{cpmCtrl.partnerData.modifiedDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>

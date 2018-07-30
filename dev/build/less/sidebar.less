@@ -1,0 +1,534 @@
+/*
+ * Component: Sidebar
+ * ------------------
+ */
+//Main Sidebar
+// ``` .left-side has been deprecated as of 2.0.0 in favor of .main-sidebar ```
+
+.main-sidebar,
+.left-side {
+  // overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 58px;
+  min-height: 100%;
+  width: @sidebar-width;
+  z-index: 810;
+  background-color: @dark;
+  //Using disposable variable to join statements with a comma
+  @transition-rule: @transition-speed @transition-fn,
+  width @transition-speed @transition-fn;
+  .transition-transform(@transition-rule);
+  @media (max-width: @screen-header-collapse) {
+    padding-top: 100px;
+  }
+  @media (max-width: @screen-xs-max) {
+    .translate(-@sidebar-width, 0);
+  }
+  .sidebar-collapse & {
+    @media (min-width: @screen-sm) {
+      .translate(-@sidebar-width, 0);
+    }
+  }
+  .sidebar-open & {
+    @media (max-width: @screen-xs-max) {
+      .translate(0, 0);
+    }
+  }
+
+  .slimScrollBar{
+    right: 5px !important;
+    border-radius: 0px !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    margin-top: 60px;
+  }
+}
+
+.sidebar {
+  padding-bottom: 10px;
+}
+
+// remove border from form
+.sidebar-form {
+
+  .input-group{
+    width: 100%;
+  }
+
+  input[type="text"]{
+    font-size: 12px;
+    color: #444444;
+  }
+
+  &::placeholder{
+    color: #888888;
+  }
+
+  input:focus {
+    border-color: transparent;
+  }
+
+  .search-box{
+    position: relative;
+    margin-bottom: 15px;
+    i{
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      z-index: 99;
+    }
+    input[type="text"]{
+      padding: 4px 12px 4px 34px;
+      border-radius: 100px;
+      height: 32px;
+      font-size: 11px;
+      font-weight: normal;
+    }
+  }
+}
+
+//Sidebar user panel
+.user-panel {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  .clearfix();
+  > .image > img {
+    width: 100%;
+    max-width: 45px;
+    height: auto;
+  }
+  > .info {
+    padding: 5px 5px 5px 15px;
+    line-height: 1;
+    position: absolute;
+    left: 55px;
+    > p {
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+    > a {
+      text-decoration: none;
+      padding-right: 5px;
+      margin-top: 3px;
+      font-size: 11px;
+      > .fa,
+      > .ion,
+      > .glyphicon {
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+// Sidebar menu
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  //First Level
+  > li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    > a {
+      padding: 15px 20px 15px 20px;
+      display: block;
+      position: relative;
+      color: #FFF;
+      font-family: @font-family-secondary;
+      font-size: 13px;
+      // text-transform: uppercase;
+      border-left: 4px solid transparent;
+      transition: @transition-global;
+      > .fa,
+      > .glyphicon,
+      > .ion {
+        width: 20px;
+      }
+      // > .icon-holder{
+      //   width: 24px;
+      //   height: 24px;
+      //   display: inline-block;
+      //   background-repeat: no-repeat;
+      //   backgroind-size: auto;
+      //   opacity: 0.7;
+      //   position: relative;
+      //   top: 4px;
+      //   margin-right: 4px;
+      //   transition: @transition-button;
+      //   background-image: url('../img/icon-admin.png');
+      // }
+
+      > .mdi{
+        font-size: 20px;
+        margin-right: 15px;
+      }
+      > span{
+        position: relative;
+        top: -2px;
+      }
+
+      > .mdi, span, .icon-holder{
+        opacity: 0.5;
+      }
+
+      &:hover{
+        > .mdi, span, .icon-holder{
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .label,
+    .badge {
+      margin-right: 5px;
+    }
+    .badge {
+      margin-top: 3px;
+    }
+  }
+
+  li.header {
+    padding: 10px 25px 10px 15px;
+    font-size: 12px;
+  }
+  // li > a > .fa-angle-left,
+  // li > a > .pull-right-container > .fa-angle-left {
+  //   width: auto;
+  //   height: auto;
+  //   padding: 0;
+  //   margin-right: 10px;
+  // }
+  // li.active {
+  //   > a > .fa-angle-left
+  //   > a > .pull-right-container > .fa-angle-left {
+  //     .rotate(-90deg);
+  //   }
+  //   > .treeview-menu {
+  //     display: block;
+  //   }
+  // }
+  
+  li > a > .fa-angle-down,
+  li > a > .pull-right-container > .fa-angle-down {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-right: 10px;
+    position: absolute;
+    top: 23px;
+    right: 8px;
+    // top: -15px;
+    // position: relative;
+  }
+  li.active {
+    > a{
+      border-left-color: @primary-pink;
+    }
+    > a > .fa-angle-down,
+    > a > .pull-right-container > .fa-angle-down {
+      .rotate(180deg);
+      top: 25px;
+    }
+    > .treeview-menu {
+      display: block;
+    }
+    .icon-holder{
+      opacity: 1;
+    }
+  }
+
+  // Sidebar Icon Background Images
+
+  // li.admin-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-admin.png');
+  // }
+
+  // li.admin-profile-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-admin-profile-setup.png');
+  // }
+
+  // li.customer-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-customer.png');
+  // }
+
+  // li.customer-profile-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-customer-profile-setup.png');
+  // }
+
+  // li.settlement-bank-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-settlement-bank.png');
+  // }
+
+  // li.settlement-bank-profile-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-settlement-bank-profile-setup.png');
+  // }
+
+  // li.member-bank-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-member-bank.png');
+  // }
+
+  // li.member-bank-profile-setup > a > .icon-holder{
+  //   background-image: url('../img/icon-member-bank-profile-setup.png');
+  // }
+
+  // li.manage-recharge-card > a > .icon-holder{
+  //   background-image: url('../img/icon-recharge-card.png');
+  // }
+
+
+  // SETTLEMENT BANK MENU
+
+  li{
+
+    > a {
+      > .icon-holder{
+        font-family: @font-family-icon;
+        font-size: 20px;
+        margin-right: 15px;
+        font-style: normal;
+      }
+    }
+
+    &.manage-scratch-card{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f638';
+          }
+        }
+      }
+    }
+
+    &.transaction-management{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f116';
+          }
+        }
+      }
+    }
+
+    &.report{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f12a';
+          }
+        }
+      }
+    }
+
+    &.messages{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f361';
+          }
+        }
+      }
+    }
+
+
+    //ADMIN
+
+    &.admin-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f006';
+          }
+        }
+      }
+    }
+
+    &.admin-profile-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f6ca';
+          }
+        }
+      }
+    }
+
+    &.settlement-bank-setup, &.member-bank-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f070';
+          }
+        }
+      }
+    }
+
+    &.settlement-bank-profile-setup, &.member-bank-profile-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f332';
+          }
+        }
+      }
+    }
+
+    &.customer-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f004';
+          }
+        }
+      }
+    }
+
+    &.customer-profile-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f631';
+          }
+        }
+      }
+    }
+
+    &.application-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f5b7';
+          }
+        }
+      }
+    }
+
+    &.commission-setup{
+      > a {
+        > .icon-holder{
+          &:before{
+            content: '\f493';
+          }
+        }
+      }
+    }
+
+    
+
+  }
+
+  .nav_click_tracker{
+    > a{
+      i{
+        font-size: 10px;
+        position: relative;
+        top: -2px;
+      }
+    }
+  }
+
+  // Tree view menu
+  .treeview-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding: 15px 0;
+    position: relative;
+    left: -1px;
+    // width: calc(100% + 1px);
+    width: 100%;
+    background: darken(@dark, 2%);
+    .treeview-menu {
+      padding-left: 20px;
+    }
+    > li {
+      margin: 0;
+      > a {
+        padding: 10px 5px 10px 30px;
+        display: block;
+        // font-size: 12px;
+        cursor: pointer;
+        transition: @transition-global;
+        font-family: @font-family-secondary;
+        // > .fa,
+        // > .glyphicon,
+        // > .ion {
+        //   font-size: 8px;
+        //   position: relative;
+        //   top: -2px;
+        //   width: auto;
+        //   text-align: center;
+        //   margin-right: 6px;
+        //   padding-left: 24px;
+        // }
+        > .pull-right-container > .fa-angle-left,
+        > .pull-right-container > .fa-angle-down,
+        > .fa-angle-left,
+        > .fa-angle-down {
+          width: auto;
+        }
+
+        i{
+          padding: 0;
+          margin-right: 20px;
+          color: #FFF;
+          opacity: 0.5;
+          font-size: 10px;
+          transition: @transition-global;
+        }
+
+        > span{
+          color: #FFF;
+          opacity: 0.5;
+          font-size: 13px;
+          transition: @transition-global;
+        }
+
+        &:hover{
+          > span, i {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar-form{
+    padding: 0 15px;
+    .search-box{
+      input{
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #FFF;
+        font-size: 13px;
+        padding: 4px 12px 4px 40px;
+        font-weight: bold;
+        transition: @transition-global;
+
+        &::-moz-placeholder,
+        &:-ms-input-placeholder,
+        &::-webkit-input-placeholder {
+          color: @text-light;
+          opacity: 1;
+          transition: @transition-global;
+        }
+      }
+
+      i{
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 18px;
+        top: 4px;
+      }
+
+      input:focus ~ i{
+        color: @primary-green;
+      }
+    }
+  }
+
+
+}

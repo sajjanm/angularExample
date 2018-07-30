@@ -1,0 +1,55 @@
+@keyframes animate-pop-up {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+		animation-timing-function: ease-in-out;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.animate-pop-up {
+  animation-duration: 1s;
+	animation-name: animate-pop-up;
+}
+
+
+@keyframes animate-slide-in-message {
+	0% {
+		right: -320px;
+	}
+
+	100% {
+		right: -20px;
+	}
+}
+
+.animate-slide-in-message {
+	animation-duration: @transition-speed;
+	animation-name: animate-slide-in-message;
+	animation-timing-function: @transition-fn-cubic-bezier;
+}
+
+@keyframes animate-slide-out-message {
+	0% {
+		right: -20px;
+	}
+
+	100% {
+		right: -320px;
+	}
+}
+
+.animate-slide-out-message {
+	animation-duration: @transition-speed;
+	animation-name: animate-slide-out-message;
+	animation-timing-function: @transition-fn-cubic-bezier;
+}
+
+
+
+
+

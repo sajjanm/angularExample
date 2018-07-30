@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Approve Customer KYC</h3>
+  <button class="btn btn-close" type="button" ng-click="cmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+
+<div class="modal-body" id="modal-body">
+  <form name="approveKyc_form" class="form-horizontal">
+
+    <div class="box-body">
+      <div class="box-section">
+        <div class="box-section-content">
+          <div class="col-md-6">
+            <div class="form-group">
+
+              <label class="control-label has-value">Assign Profile</label>
+
+              <select class="form-control" id="custProfile" name="custProfile"  ng-model="cmCtrl.kycData.custProfileId">
+                <option value="" ng-disabled="cmCtrl.kycData.custProfileId.length > 0">Select Profile</option>
+                <option ng-repeat="custProfile in cmCtrl.customerProfileList" value="{{custProfile.id}}">{{custProfile.description | lowercase}} </option>
+              </select>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-block">
+        <button class="btn btn-primary" type="button" ng-click="cmCtrl.ok()" ng-disabled="approveKyc_form.$invalid">Approve</button>
+      </div>
+    </div>  
+  </form>
+</div>

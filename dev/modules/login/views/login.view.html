@@ -1,0 +1,50 @@
+﻿<div class="hold-transition login-page preloader-content">
+  <div class="global-message-block" ng-show="loginCtrl.error">
+    <div class="message message-error"><i class="mdi mdi-close-octagon"></i><span>{{ loginCtrl.error_message }}</span></div>
+    <button type="button" ng-click="fundTransferCtrl.resetError()" class="global-message-close-btn"><i class="mdi mdi-close"></i></button>
+  </div>
+
+  <div class="login-box">
+    <div class="login-banner-body">
+      <h2>Admin </br>Panel </br>Login <div class="login-banner-underline"></div></h2>
+      <div class="login-banner-footer"></div>
+    </div>
+
+    <div class="login-box-body">
+      <div class="login-logo">
+        <img src="img/brand-login.png" alt="SmartCard">
+      </div>
+
+      <div class="loader-body" ng-show="!loginCtrl.loaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+      
+      <form class="form-body" name="form" ng-submit="loginCtrl.login(form)" ng-hide="!loginCtrl.loaded">
+        <div class="form-group has-label-icon has-required-validation">
+            <input type="text" class="form-control form-username" id="username" name="username" placeholder="Username" autofocus ng-model="loginCtrl.user.username" required>
+            <i class="label-icon mdi mdi-face"></i>
+            <div class="required-validation" ng-show="form.username.$dirty && form.username.$invalid">
+              <i class="mdi mdi-close-circle validation-icon validation-error" ng-show="form.username.$error.required" uib-tooltip="Username is required" tooltip-placement="bottom"></i>
+            </div>
+        </div>
+
+        <div class="form-group has-label-icon has-required-validation">
+            <input type="password" class="form-control form-password" id="password" name="password" placeholder="Password" ng-model="loginCtrl.user.password" required>
+            <i class="label-icon mdi mdi-lock-outline"></i>
+            <div class="required-validation" ng-show="form.password.$dirty && form.password.$invalid">
+              <i class="mdi mdi-close-circle validation-icon validation-error" ng-show="form.password.$error.required" uib-tooltip="Password is required" tooltip-placement="bottom"></i>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" ng-disabled="form.$invalid">Login</button>
+        <a href="javascript:void(0)" ng-click="loginCtrl.forgotYourPassword();" title="" class="secondary-link">Unable to login to your account?</a>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+

@@ -1,0 +1,79 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Customer Profile List
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="alert alert-danger" ng-show="customerProfileCtrl.error">{{ customerProfileCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="customerProfileCtrl.success">{{ customerProfileCtrl.success_message }}</div>
+
+
+      <div class="box-body" ng-show="!customerProfileCtrl.paginationLoaded" ng-hide="customerProfileCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <div class="box-body">
+        <div class="table-minimal-2" ng-show="customerProfileCtrl.paginationLoaded">                    
+          <table ng-table="customerProfileCtrl.tableParams" class="table table-bordered">
+            <thead>
+              <tr>
+                <!-- <th>S.N</th> -->
+                <th class="has-search-input">
+                  <button class="dropdown-toggle search" data-toggle="dropdown">
+                    <p class="title"><i class="mdi mdi-magnify"></i>Name</p>
+                  </button>
+                  <div class="dropdown-menu">
+                    <input placeholder="Name" type="text" class="form-control" ng-model="customerProfileCtrl.tableParams.filter()['name']">
+                  </div>
+                  <p ng-if="customerProfileCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by: {{customerProfileCtrl.tableParams.filter()['name']}}</p>
+                </th>
+                <th>Description</th>
+                <th>Profile Status</th>
+                <th></th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-if="customerProfileCtrl.allClientProfilesPagination.length" ng-repeat="clientProfile in customerProfileCtrl.allClientProfilesPagination" ng-click="customerProfileCtrl.detailModal(clientProfile)">
+              <!-- <td style="text-align: left" class="text-center">
+                <span>{{$index+customerProfileCtrl.sno}}</span>
+              </td> -->
+              <td>{{clientProfile.name}}</td>
+              <td>{{clientProfile.description}}</td>
+              <td>{{clientProfile.profileStatus.description}}</td>
+              <td class="action-column">
+                <a uib-tooltip="Edit Profile" ng-click="customerProfileCtrl.editProfile(clientProfile); $event.stopPropagation();">
+                  <i class="mdi mdi-pen"></i>
+                </a>
+                <a uib-tooltip="Delete Profile" ng-click="customerProfileCtrl.deleteModal(clientProfile); $event.stopPropagation();">
+                  <i class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+            <tr ng-if="customerProfileCtrl.paginationLoaded && customerProfileCtrl.allClientProfilesPagination.length === 0">
+              <td colspan="5">
+                <div class="box-main-icon no-records">
+                 <div class="image-holder">
+                  <img src="img/ic-no-record.png" alt="">                    
+                </div>
+                <span>No record(s) found</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>

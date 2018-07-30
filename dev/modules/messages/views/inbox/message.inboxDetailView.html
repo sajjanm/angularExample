@@ -1,0 +1,66 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-inbox"></i>
+    Inbox Messages
+  </h1>
+</section>
+
+<section class="content">
+  <div class="alert alert-danger" ng-show="msgCtrl.error">{{ msgCtrl.error_message }}</div>
+  <div class="alert alert-success" ng-show="msgCtrl.success">{{ msgCtrl.success_message }}</div>
+
+  <div class="box inbox-section">
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="back-button">
+            <button class="btn btn-back" type="button" ng-click="msgCtrl.cancel()"><i class="mdi mdi-arrow-left"></i></button>
+          </div>
+          <div class="user-detail-block">
+            <div class="user-profile-image">
+              <img ng-src="{{msgCtrl.messageDetail.senderImageLocation}}" alt="User Image">
+            </div>
+            <div class="user-profile-details">
+              <!-- <p class="user-name">{{messageDetail.senderType}}</p> -->
+              <p class="user-name">{{msgCtrl.messageDetail.senderName}}</p>
+              <p class="timestamp"><i class ="mdi mdi-calendar-clock"></i>{{msgCtrl.messageDetail.createdDate | date: 'MMM dd, yyyy at h:mma'}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <ul class="inbox-action-block">
+            <li><button ng-click="msgCtrl.reply()" class="btn"><i class="mdi mdi-reply"></i>Reply</button></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12">
+          <div class="view-message-block">
+            <h4 class="subject-title">{{msgCtrl.messageDetail.subject}}</h4>              
+            <div>
+              <div ng-repeat="subMessage in msgCtrl.parentMessages">
+                <div class="message-box view-message" autocomplete="off" required text-angular ng-model="subMessage" ta-disabled="true" ta-toolbar-class="ng-hide">
+                </div>
+              </div>
+              <div class="message-box view-message" ng-model="msgCtrl.messageDetail.message" autocomplete="off" text-angular ta-disabled="true" ta-toolbar-class="ng-hide">
+              </div>
+            </div>
+
+            <form ng-show="msgCtrl.replyFlag" ng-hide="!msgCtrl.replyFlag" name="replyForm" class="message-box-wrapper">
+              <div class="message-box" autocomplete="off" required text-angular ng-required="msgCtrl.replyFlag" ng-model="msgCtrl.message.message">
+              </div>
+              <button type="button" class="btn btn-footer btn-send pull-right" ng-click="msgCtrl.sendReply()" ng-disabled="replyForm.$invalid"><i class="mdi mdi-send"></i>Reply</button>
+            </form>
+
+          </div>
+            
+        </div>
+      </div>  
+
+        
+    </div>
+  </div>
+  
+
+</section>

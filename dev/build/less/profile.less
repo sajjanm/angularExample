@@ -1,0 +1,381 @@
+role-block/*
+ * Page: Profile
+ * -------------
+ */
+
+.profile-user-img {
+  margin: 0 auto;
+  width: 100px;
+  padding: 3px;
+  border: 3px solid @gray;
+}
+
+.profile-username {
+  font-size: 21px;
+  margin-top: 5px;
+}
+
+.post {
+  border-bottom: 1px solid @gray;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  color: #666;
+  &:last-of-type {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .user-block {
+    margin-bottom: 15px;
+  }
+}
+
+
+// GLOBAL USER DETAIL BLOCK
+
+.user-detail-block{
+  .user-profile-image{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 100px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .user-profile-details{
+    display: inline-block;
+  }
+}
+
+
+.user-profile-basic-info-block{
+  display: inline-block;
+  .user-profile-image-wrapper{
+    position: relative;
+    overflow: hidden;
+    .img-circle{
+
+      // &:hover ~ .btn{
+      //   display: block;
+      // }
+
+    }
+    .btn{
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      background-color: rgba(255, 255, 255, 0.6);
+      height: 100%;
+      width: 100%;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    &:hover{
+      .btn{
+        display: block;
+      }
+    }
+  }
+}
+
+
+// FROM CLIENT
+
+.user-profile-block-wrapper{
+  margin-bottom: 4rem;
+    padding-bottom: 3rem;
+  .user-profile-image-holder{
+    display: block;
+    width: 100%;
+    max-width: 130px;
+    position: relative;
+    margin: 0 auto 15px auto;
+    vertical-align: top;
+
+    button{
+      background-color: transparent;
+      border: 4px solid #F7F7F7;
+      box-shadow: none;
+      padding: 0;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      // box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
+      border-radius: 100px;
+      overflow: hidden;
+      // transition: box-shadow 0.25s ease-in-out;
+      transition: @transition-button;
+      outline: none;
+
+      &:hover{
+        .upload-icon-popup{
+          display: block;
+        }
+
+        border-width: 8px; 
+      }
+
+      &:hover, &:focus, &:active{
+        outline: none;
+      }
+    }
+
+    img{
+      width: 100%;
+    } 
+
+    .upload-icon-popup{
+          display: none;
+          position: absolute;
+          bottom: 0px;
+          right: 5px;
+          background: @primary-pink;
+          border-radius: 100px;
+          width: 42px;
+          height: 42px;
+          text-align: center;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+          color: @primary-pink;
+          i{
+            color: #FFF;
+            position: relative;
+              top: 10px;
+          font-size: 18px;
+          }
+        }
+  }
+
+  .user-profile-information{
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 10px;
+    .primary-name{
+      // font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: @dark-text;
+      position: relative;
+
+      .account-verified-icon{
+        color: @primary-green;
+        font-size: 24px;
+        margin: 0 4px;
+          position: relative;
+          top: 2px;
+      }
+    }
+    .secondary-details{
+      color: @text-secondary;
+      font-weight: 600;
+      span{
+        display: block;
+        margin-bottom: 0.4rem;
+        i{
+          margin-right: 8px;
+            font-size: 1px;
+            // position: relative;
+            // top: -1px;
+            width: 14px;
+        }
+      }
+
+      .username{
+        color: @text-secondary;
+      }
+    }
+  }
+}
+
+
+// UPLOAD PROFILE PHOTO
+
+.picture-crop-content{
+  // margin-top: 35px;
+  .cropArea{
+    img-crop{
+        overflow: hidden;
+        width:200px;
+        height:200px;
+        display: block;
+        margin: 0 auto; 
+    }
+    
+  }
+  canvas{
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+    top: 0;
+    left: 0;
+  }
+}
+
+.picture-preview-title{
+  color: @icon-light;
+  margin-bottom: 25px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.picture-preview-content{
+  display: inline-block;
+  border-radius: 100%;
+  overflow: hidden;
+  height: 200px;
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+// .picture-preview-default-content{
+//  display: block;
+//     width: 200px;
+//     height: 200px;
+//     margin: 0 auto;
+//     background: #EEE;
+//     border-radius: 100%;
+
+//     i{
+//    font-size: 76px;
+//    color: #CCC;
+//    line-height: 190px;
+//     }
+// }
+
+.picture-upload-instructions{
+  text-align: left;
+  padding: 10px 30px;
+  // border: 1px solid darken(@dark, 5%);
+  border-radius: @box-border-radius;
+  background-color: @dark-form-control-background;
+  margin-bottom: 30px;
+  ul{
+    color: @icon-dark;
+  }
+
+  i{
+    display: block;
+    text-align: center;
+    font-size: 72px;
+    color: @icon-light;
+  }
+
+  p{
+    color: @icon-light;
+  }
+
+  ul{
+    color: @icon-dark;
+  }
+}
+
+.secondary-details-block{
+
+  .title{
+    color: @text-secondary;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  ul{
+    padding: 0;
+    margin-bottom: 30px;
+    li{
+      list-style-type: none;
+      color: @dark-text;
+      margin-bottom: 6px;
+      font-weight: 600;
+
+      i{
+        margin-right: 15px;
+        font-size: 16px;
+        color: lighten(@dark-text, 20%)
+      }
+    }
+  }
+}
+
+.password-policy-block{
+  li{
+    line-height: 1.8;
+    font-weight: bold;
+    color: @dark-text;
+  }
+}
+
+// ROLE ASSIGN
+
+.role-block{
+  .role-block-row{
+    display: inline-block;
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 0px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    box-shadow: @box-boxshadow;
+    .checkbox{
+      padding-top: 0;
+      min-height: auto;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin: 0;
+
+      &.role-block-parent{
+        label{
+          text-transform: uppercase;
+        }
+      }
+
+      &.role-block-child{
+        background-color: #FAFAFA;
+      }
+
+      label{
+        font-weight: bold;
+        font-size: 13px;
+        position: relative;
+      }
+      input[type=checkbox]{
+        top: -1px;
+      }
+    }
+  }
+
+  &.view-block{
+    &.boxed{
+      .role-block-row{
+        background-color: transparent;
+        box-shadow: none;
+        .checkbox{
+          &.role-block-child{
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .role-block-row{
+      border-bottom: 1px dashed #DDD;
+      .checkbox{
+        &.role-block-parent, &.role-block-child{
+          i{
+                font-size: 10px;
+                margin-right: 10px;
+                position: relative;
+                top: -1px;
+                color: @icon-light;
+          }
+        }
+        label{
+          padding: 0;
+        }
+      }
+    }
+
+  }
+
+}

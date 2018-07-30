@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Member Bank Details</h3>
+  <button class="btn btn-close" type="button" ng-click="mbCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+<div class="modal-body" id="modal-body">
+  <div class="box-body">
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Bank Information</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Name</label>
+              <div class="form-value">{{mbCtrl.memberBank.name}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Description</label>
+              <div class="form-value">{{mbCtrl.memberBank.description}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+            <label class="control-label has-value">Email</label>
+              <div class="form-value">{{mbCtrl.memberBank.email}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Swift Code</label>
+              <div class="form-value">{{mbCtrl.memberBank.swiftCode}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Mirror Account Number</label>
+              <div class="form-value">{{mbCtrl.memberBank.mirrorAccountNumber}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Account Number</label>
+              <div class="form-value">{{mbCtrl.memberBank.accountNo}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Username</label>
+              <div class="form-value">{{mbCtrl.memberBank.username}}</div>
+            </div>   
+          </div>          
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">API User Name</label>
+              <div class="form-value">{{mbCtrl.memberBank.apiUserName}}</div>
+            </div>         
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">API URL</label>
+              <div class="form-value">{{mbCtrl.memberBank.apiUrl}}</div>
+            </div> 
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="box-section">
+      <h4 class="box-section-title"><i class="mdi mdi-cash-multiple"></i>Profile Roles</h4>
+      <div class="box-section-content">
+        <div class="row">
+          <div class="role-block">
+            <div class="row">
+              <div class="checkbox" ng-repeat="roles in mbCtrl.profile.smartCardParentRoleResponses">
+                <div class="role-block-row" ng-show="roles.isActive">
+                  <div class="col-md-12">
+                    <div class="col-md-4 checkbox role-block-parent">
+                      <label>
+                        {{roles.uiGroupName}}
+                      </label>
+                    </div>
+                    <div class="col-md-8 checkbox role-block-child">
+                      <div class="col-md-4 role-block-child-element" ng-repeat="childRole in roles.childRoles" ng-show="childRole.isActive">
+                        <label>
+                          {{childRole.name}}
+                        </label>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

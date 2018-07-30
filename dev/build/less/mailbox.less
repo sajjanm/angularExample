@@ -1,0 +1,260 @@
+/*
+ * Page: Mailbox
+ * -------------
+ */
+.mailbox-messages {
+  > .table {
+    margin: 0;
+  }
+}
+
+.mailbox-controls {
+  padding: 5px;
+  &.with-border {
+    border-bottom: 1px solid @box-border-color;
+  }
+}
+
+.mailbox-read-info {
+  border-bottom: 1px solid @box-border-color;
+  padding: 10px;
+  h3 {
+    font-size: 20px;
+    margin: 0;
+  }
+  h5 {
+    margin: 0;
+    padding: 5px 0 0 0;
+  }
+}
+
+.mailbox-read-time {
+  color: #999;
+  font-size: 13px;
+}
+
+.mailbox-read-message {
+  padding: 10px;
+}
+
+.mailbox-attachments {
+  &:extend(.list-unstyled);
+  li {
+    float: left;
+    width: 200px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+}
+
+.mailbox-attachment-name {
+  font-weight: bold;
+  color: #666;
+}
+
+.mailbox-attachment-icon,
+.mailbox-attachment-info,
+.mailbox-attachment-size {
+  display: block;
+}
+
+.mailbox-attachment-info {
+  padding: 10px;
+  background: #f4f4f4;
+}
+
+.mailbox-attachment-size {
+  color: #999;
+  font-size: 12px;
+}
+
+.mailbox-attachment-icon {
+  text-align: center;
+  font-size: 65px;
+  color: #666;
+  padding: 20px 10px;
+  &.has-img {
+    padding: 0;
+    > img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.mailbox-attachment-close {
+  &:extend(.close);
+}
+
+
+.mailbox{
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  .user-detail-block{
+    .user-profile-image{
+      vertical-align: top;
+    }
+    .user-profile-details{
+      display: inline-block;
+      .subject{
+        font-size: 13px;
+        margin: 0 0 2px 0;
+      }
+      .user-name{
+        color: @icon-light;
+        font-size: 12px;
+        margin: 0;
+      }
+    }
+  }  
+}
+
+.table-minimal-2{
+  .mailbox{
+    > thead{
+      display: none;
+    }
+    > tbody {
+      > tr {
+        > td{
+          padding: 15px 30px;
+
+          &:first-child{
+            border-radius: 8px 0 0 8px;
+          }
+          &:last-child{
+            border-radius: 0 8px 8px 0;
+          }
+
+          &.timestamp{
+            text-align: right;
+            vertical-align: middle;
+            color: @icon-light;
+            i{
+              margin-right: 6px
+            }
+          }
+
+          .bullet{
+            display: inline-block;
+            width: 20px;
+            vertical-align: top;
+            position: relative;
+            top: 10px;
+
+            i{
+              color: @icon-light;
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.inbox-section{
+  .user-detail-block{
+    display: inline-block;
+    .user-profile-image{
+      vertical-align: top;
+    }
+
+    .user-profile-details{
+      .user-name{
+        font-size: 13px;
+        font-weight: bold;
+        margin: 0 0 2px 0; 
+        color: @icon-dark;
+      }
+
+      .timestamp{
+        color: @icon-light;
+        font-size: 12px;
+        i{
+          font-size: 14px;
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+
+  .back-button{
+    display: inline-block;
+    vertical-align: top;
+    button{
+      background-color: transparent;
+      padding: 0;
+      margin-right: 15px;
+      font-size: 24px;
+      position: relative;
+      top: 2px;
+      color: @icon-light;
+      &:hover{
+        color: @icon-dark;
+      }
+    }
+  }
+
+  .view-message-block{
+    padding: 20px 45px 20px 45px;
+
+    h4{
+      margin-bottom: 30px;
+    }
+  }
+
+  .view-message{
+    margin-bottom: 30px;
+    &.ta-root >{
+      .ta-scroll-window{
+        &.form-control{
+          // background-color: transparent;
+          // border-radius: 0;
+          min-height: auto;
+        }
+
+        .ta-bind{
+          // padding: 0;
+          min-height: auto;
+        }
+      }
+    }  
+  }
+  
+
+}
+
+
+
+.inbox-action-block{
+  float: right;
+
+  li{
+    list-style-type: none;
+    display: inline-block;
+
+    button{
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-radius: 100px;
+      color: @icon-light;
+      padding: 6px 16px 6px 12px;
+      transition: @transition-global;
+
+      &:hover{
+        color: rgba(255, 255, 255, 0.9);
+        border-color: @primary-pink;
+        background-color: @primary-pink;
+      }
+
+      i{
+        margin-right: 6px;
+        font-size: 16px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+}

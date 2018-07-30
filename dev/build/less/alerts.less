@@ -1,0 +1,120 @@
+/*
+ * Component: alert
+ * ----------------
+ */
+
+.alert {
+  .border-radius(3px);
+  padding:  10px 14px;
+  h4 {
+    font-weight: 600;
+  }
+  .icon {
+    margin-right: 10px;
+  }
+  .close {
+    color: #000;
+    .opacity(.2);
+    &:hover {
+      .opacity(.5);
+    }
+  }
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+//Alert Variants
+.alert-success {
+  &:extend(.bg-green);
+  border-color: darken(@green, 5%);
+}
+
+.alert-danger,
+.alert-error {
+  &:extend(.bg-red);
+  border-color: darken(@red, 5%);
+}
+
+.alert-warning {
+  &:extend(.bg-yellow);
+  border-color: darken(@yellow, 5%);
+}
+
+.alert-info {
+  &:extend(.bg-aqua);
+  border-color: darken(@aqua, 5%);
+}
+
+.global-message-block{
+    position: fixed;
+    z-index: 999;
+    top: 90px;
+    right: -20px;
+    width: 300px;
+
+  .message{
+    background-color: fade(@dark, 96%);
+    padding: 14px 45px 14px 50px;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+    color: @dark-text;
+    border-radius: 6px 0 0 6px;
+    font-weight: bold;
+    box-shadow: 0 16px 20px -10px rgba(0, 0, 0, 0.2);
+    color: #FFF;
+    position: relative;
+    &:extend(.animate-slide-in-message);
+
+    i{
+      position: absolute;
+      background-color: @dark;
+      font-size: 26px;
+      width: 60px;
+      height: 60px;
+      border-radius: 100px;
+      text-align: center;
+      line-height: 60px;
+      top: -7px;
+      left: -20px;
+      color: #FFF;
+    }
+
+    &.message-error{
+      i{
+        background-color: @red;
+      }
+    }
+    &.message-success{
+      i{
+        background-color: #79c341;
+      }
+    }
+  }
+
+  .global-message-close-btn{
+    background-color: transparent;
+    color: fade(#FFF, 0%);
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    border: 0;
+    font-size: 16px;
+    transition: @transition-button;
+    &:hover{
+      color: fade(#FFF, 70%);
+    }
+  }
+
+  &.ng-hide{
+    .message{
+      &:extend(.animate-slide-out-message);
+    }
+  }
+
+  &:hover{
+    .global-message-close-btn{
+      color: fade(#FFF, 50%);
+    }
+  }
+}

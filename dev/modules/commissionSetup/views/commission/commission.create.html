@@ -1,0 +1,203 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-settings"></i>
+    Create Commission
+  </h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box-body" ng-show="!commissionCtrl.loaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+      <div class="alert alert-danger" ng-show="commissionCtrl.error">{{ commissionCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="commissionCtrl.success">{{ commissionCtrl.success_message }}</div>
+
+      <!-- form start -->
+      <form ng-submit="commissionCtrl.createCommission(commission_form)" name="commission_form" class="form-horizontal" ng-if="commissionCtrl.commissionPartnerData && commissionCtrl.payeeEventData && commissionCtrl.loaded">
+        <div class="box">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="payeeEvent" class="col-sm-3 control-label required-field">Payee Event</label>
+              <div class="col-sm-5">
+                <div class="ui-select-container ">
+                  <ui-select ng-model="commissionCtrl.commission.payeeEventId" ng-required="true">
+                  <ui-select-match placeholder="Select a Payee Event">{{$select.selected.name}}</ui-select-match>
+                  <ui-select-choices repeat="payeeEvent.id as payeeEvent in commissionCtrl.allPayeeEvent | filter: {description: $select.search}">
+                  <span ng-bind="payeeEvent.description"></span>
+                </ui-select-choices>
+              </ui-select>
+              <div class="required-validation"> 
+                <i class="mdi mdi-close-circle validation-icon validation-error" ng-if="commissionCtrl.allPayeeEvent.length === 0" uib-tooltip="Commissions for all Payee Event are already set or not found" ></i> 
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="commissionPayee" class="col-sm-3 control-label required-field">Commission Payee</label>
+          <div class="col-sm-5 select">
+            <select id="commissionPayee" name="commissionPayee" class="form-control" ng-model="commissionCtrl.commission.commissionPayee" required>
+              <option value="">Select Commission Payee</option>
+              <option ng-repeat="option in commissionCtrl.commissionPayee" value="{{option.value}}">{{option.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="commissionType" class="col-sm-3 control-label required-field">Commission Type</label>
+          <div class="col-sm-5">
+            <select id="commissionType" ng-change="commissionCtrl.resetTotalCommissionValue()" name="commissionType" class="form-control" ng-model="commissionCtrl.commission.commissionType" required>
+              <option value="">Select Commission Type</option>
+              <option ng-repeat="option in commissionCtrl.commissionType" value="{{option.value}}">{{option.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="commissionCtrl.commission.commissionType == 'SLAB'">
+          <label for="payeeEvent" class="col-sm-3 control-label required-field">Commission Slab</label>
+          <div class="col-sm-5">
+            <ui-select ng-change="commissionCtrl.commissionSlabDetail(false)" ng-model="commissionCtrl.commission.commissionSlabId" ng-required="true">
+            <ui-select-match placeholder="Select a Commission Slab">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="commissionSlab.id as commissionSlab in commissionCtrl.allCommissionSlab | filter: {name: $select.search}">
+            <span ng-bind="commissionSlab.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-minimal-2" ng-if="commissionCtrl.commission.commissionSlabId && commissionCtrl.commission.commissionType == 'SLAB'">
+  <table class="table report">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Created By</th>
+        <th>Created Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{commissionCtrl.commissionSlabDetailView.name}}</td>
+        <td>{{commissionCtrl.commissionSlabDetailView.description}}</td>
+        <td>{{commissionCtrl.commissionSlabDetailView.createdBy.name}}</td>
+        <td>{{commissionCtrl.commissionSlabDetailView.createdDate | date: 'yyyy-MMM-dd h:mma'}}</td>
+      </tr>
+    </tbody>     
+  </table>  
+
+  <table class="table report">
+    <thead>
+      <tr>
+        <th>Charge Type</th>
+                <!--
+                  <th>Range From</th>
+                  <th>Range To</th>
+                -->
+                <th>Ranges</th>
+                <th>Charge Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="commissionSlabValue in commissionCtrl.commissionSlabDetailView.commissionSlabValueDtos">
+                <td>{{commissionSlabValue.chargeType}}</td>
+                <td ng-if="false">{{commissionSlabValue.rangeFrom}}</td>
+                <td>
+                  <span ng-if="!commissionSlabValue.andAboveRange">{{commissionSlabValue.rangeTo}}</span>
+                  <span ng-if="commissionSlabValue.andAboveRange">{{commissionSlabValue.rangeFrom}} and above ranges</span>
+                </td>
+                <td>{{commissionSlabValue.charge}}</td>
+              </tr>
+            </tbody>     
+          </table>     
+        </div>
+
+        <div class="callout callout-primary">
+          <p><i class="mdi mdi-information-outline callout-icon"></i>Sum of Commission Value in Commission Partner must be equal to Total Commission Value.</p>
+        </div>
+
+        <div ng-if="commissionCtrl.commissionShareError" class="callout callout-warning">
+          <p><i class="mdi mdi-alert-circle-outline callout-icon"></i>{{commissionCtrl.commissionShareErrorMessage}}</p>     
+        </div>
+
+
+        <div class="box">
+          <ng-form name="commissionShare_form">
+            <div class="box-body">
+              <div class="form-group" ng-if="commissionCtrl.commission.commissionType == 'FLAT' || commissionCtrl.commission.commissionType == 'PERCENTAGE'">
+                <label for="totalCommission" class="col-sm-3 control-label required-field">Total Commission Value</label>
+
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="totalCommission" name="totalCommission" placeholder="Total Commission value" ng-change="commissionCtrl.clearCommissionShareErrorMessage()" only-floats ng-model="commissionCtrl.commission.totalCommission" maxlength="6" autocomplete="off" ng-required="true">
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="commissionCtrl.commission.commissionType == 'SLAB'">
+                <label for="totalCommission" class="col-sm-3 control-label">Total Commission Value</label>
+                <label class="col-sm-6 form-value">{{commissionCtrl.commission.totalCommission}}</label>
+              </div>
+
+              <table class="table table-bordered-minimal">
+                <thead>
+                  <tr>
+                    <th class="required-field">Commission Partner</th>
+                    <th class="required-field">Commission Value</th>
+                    <th><!-- Remove Partner --></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-ng-repeat="commissionShare in commissionCtrl.commission.commissionShareRequest">
+                    <td class="form-group">
+                      <ui-select id="{{commissionShare.id}}_commissionPartner" name="commissionPartner" ng-model="commissionShare.commissionPartnerId" ng-change="commissionCtrl.isPartnerAlreadyAdded($index)" ng-required="true">
+                        <ui-select-match placeholder="Select a Commission Partner">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="commissionPartner.id as commissionPartner in commissionCtrl.allCommissionPartner | filter: {name: $select.search}">
+                          <span ng-bind="commissionPartner.name"></span>
+                        </ui-select-choices>
+                      </ui-select>
+                      <div class ="alert-danger" ng-if="commissionCtrl.allCommissionPartner.length === 0">
+                        Commission Partners are not found
+                      </div>
+                    </td>
+                    <td class="form-group">
+                      <input class="form-control" type="text" id="{{commissionShare.id}}_commissionValue" name="commissionValue" placeholder="Enter Commission Value" ng-change="commissionCtrl.clearCommissionShareErrorMessage()" only-floats ng-model="commissionShare.commissionValue" maxlength="6" autocomplete="off" required>
+                    </td>
+                    <td class="action-column">
+                      <a uib-tooltip="Remove Partner" ng-click="commissionCtrl.removePartner($index)">
+                        <i class="mdi mdi-account-remove"></i>
+                      </a>
+                    </td>
+
+                  </tr>
+                </tbody>     
+              </table>
+            </div>
+
+          </ng-form>
+          <div class="btn-block">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-hollow" ng-show="!commissionCtrl.showAboveRange" ng-disabled="commissionShare_form.$invalid" ng-click="commissionCtrl.addNewPartner(); commissionCtrl.clearCommissionShareErrorMessage()"><i class="mdi mdi-account-plus"></i>Add New Partner</button>
+              </div>
+            </div>  
+          </div>
+        </div>
+
+        <!-- /.box-body -->
+        <div class="btn-block">
+          <button type="submit" class="btn btn-primary" ng-disabled="commission_form.$invalid">Create</button>
+          <input type="button" ng-click="commissionCtrl.resetForm()" class="btn btn-default" value="Reset" />
+        </div>
+        <!-- /.box-footer -->
+</form>
+<!-- /.box -->
+</div>
+</div>        
+</section>

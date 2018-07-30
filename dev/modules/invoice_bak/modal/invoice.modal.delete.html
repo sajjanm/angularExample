@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Delete Admin</h3>
+    <button class="btn btn-close" type="button" ng-click="admCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+
+<div class="box-body" ng-show="!admCtrl.deleteModalLoadingScreen" ng-hide="admCtrl.deleteModalLoadingScreen">
+  <div class="loader-block">
+    <div class="loader"></div>
+    <p class="loader-text">Please wait...</p>
+  </div>
+</div>
+<div class="modal-body" id="modal-body" ng-show="admCtrl.deleteModalLoadingScreen">
+    
+  <form name="admin_form" class="form-horizontal">
+
+    <div class="box-body">
+      <div class="box-section">
+        <div class="box-section-content">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Admin Name</label>
+              <div class="form-value">{{admCtrl.admin.name}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Username</label>
+              <div class="form-value">{{admCtrl.admin.username}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Email</label>
+              <div class="form-value">{{admCtrl.admin.email}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label has-value">Contact</label>
+              <div class="form-value">{{admCtrl.admin.contact}}</div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="deleted_remarks" class="control-label has-value required-field">Delete Remarks</label>
+              <input type="text" class="form-control" id="deleted_remarks" name="deleted_remarks" placeholder="Delete Remarks" ng-model="admCtrl.admin.deletedRemarks" required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-block">
+        <button class="btn btn-primary" ng-disabled="admin_form.$invalid" type="button" ng-click="admCtrl.ok()">Delete</button>
+      </div>
+    </div>  
+
+  </form>
+</div>

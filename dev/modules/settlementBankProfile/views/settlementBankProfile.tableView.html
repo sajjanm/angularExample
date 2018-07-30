@@ -1,0 +1,76 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Settlement Bank Profile List
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="alert alert-danger" ng-show="settlementBankProfileCtrl.error">{{ settlementBankProfileCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="settlementBankProfileCtrl.success">{{ settlementBankProfileCtrl.success_message }}</div>
+
+      <div class="box-body" ng-show="!settlementBankProfileCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+
+      <div class="table-minimal-2" ng-show="settlementBankProfileCtrl.paginationLoaded">                    
+        <table ng-table="settlementBankProfileCtrl.tableParams" class="table filter-table">
+          <thead>
+            <tr>
+              <!-- <th>S.N</th> -->
+              <th class="has-search-input">
+                <button class="dropdown-toggle search" data-toggle="dropdown">
+                  <p class="title"><i class="mdi mdi-magnify"></i>Name</p>
+                </button>
+                <div class="dropdown-menu">
+                  <input placeholder="Name" type="text" class="form-control" ng-model="settlementBankProfileCtrl.tableParams.filter()['name']">
+                </div>
+                <p ng-if="settlementBankProfileCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by: {{settlementBankProfileCtrl.tableParams.filter()['name']}}</p>
+              </th>
+              <th>Description</th>
+              <th>Profile Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-if="settlementBankProfileCtrl.allSettlementBankProfilesPagination.length" ng-repeat="settlementBankProfile in settlementBankProfileCtrl.allSettlementBankProfilesPagination" ng-click="settlementBankProfileCtrl.detailModal(settlementBankProfile)">
+              <!-- <td style="text-align: left" class="text-center">
+                <span>{{$index+settlementBankProfileCtrl.sno}}</span>
+              </td> -->
+              <td>{{settlementBankProfile.name}}</td>
+              <td>{{settlementBankProfile.description}}</td>
+              <td>{{settlementBankProfile.profileStatus.description}}</td>
+              <td class="action-column">
+                <a uib-tooltip="Edit Profile" ng-click="settlementBankProfileCtrl.editProfile(settlementBankProfile); $event.stopPropagation();">
+                  <i class="mdi mdi-pen"></i>
+                </a>
+                <a uib-tooltip="Delete Profile" ng-click="settlementBankProfileCtrl.deleteModal(settlementBankProfile); $event.stopPropagation();">
+                  <i class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+            <tr ng-if="settlementBankProfileCtrl.paginationLoaded && settlementBankProfileCtrl.allSettlementBankProfilesPagination.length === 0">
+              <td colspan="5">
+                <div class="box-main-icon no-records">
+                 <div class="image-holder">
+                  <img src="img/ic-no-record.png" alt="">                    
+                </div>
+                <span>No record(s) found</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>

@@ -1,0 +1,80 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    List of Commission Slabs
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger" ng-show="commissionSlabCtrl.error">{{ commissionSlabCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="commissionSlabCtrl.success">{{ commissionSlabCtrl.success_message }}</div>
+
+      <div class="box-body" ng-show="!commissionSlabCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <div class="table-minimal-2" ng-show="commissionSlabCtrl.paginationLoaded">
+        <table ng-table="commissionSlabCtrl.tableParams"class="table filter-table">
+          <thead>
+            <tr>
+              <!-- <th>S.N</th> -->
+              <th class="has-search-input">
+                <span>Slab Name</span>
+                <button class="dropdown-toggle search" data-toggle="dropdown"><i class="mdi mdi-magnify"></i></button>
+                <div class="dropdown-menu">
+                  <input type="text" placeholder="Name" class="form-control" ng-model="commissionSlabCtrl.tableParams.filter()['name']">
+                </div>
+                <span ng-if="commissionSlabCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by:{{ commissionSlabCtrl.tableParams.filter()['name']}}</span>
+              </th>
+              <th>Description</th>
+              <th>Created By</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-if="commissionSlabCtrl.allSlabByPagination.length" ng-repeat="slab in commissionSlabCtrl.allSlabByPagination" ng-click="commissionSlabCtrl.detailModal(slab)">
+              <!-- <td style="text-align: left" class="text-center">
+                <span>{{$index+commissionSlabCtrl.sno}}</span>
+              </td> -->
+              <td>{{slab.name}}</td>
+              <td>{{slab.description}}</td>
+              <td>{{slab.createdBy.name}}</td>
+              <td class="action-column">
+                <a uib-tooltip="Edit Slab" ng-click="commissionSlabCtrl.editSlab(slab); $event.stopPropagation();">
+                  <i class="mdi mdi-pen"></i>
+                </a>
+                <a uib-tooltip="Delete Slab" ng-click="commissionSlabCtrl.deleteModal(slab); $event.stopPropagation();">
+                  <i class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+            <tr ng-if="commissionSlabCtrl.paginationLoaded && commissionSlabCtrl.allSlabByPagination.length === 0">
+              <td colspan="4">
+                <div class="box-main-icon no-records">
+                 <div class="image-holder">
+                  <img src="img/ic-no-record.png" alt="">                    
+                </div>
+                <span>No record(s) found</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>  
+    <!-- /.box-body -->
+
+  </div>
+</div>
+
+</section>
+<!-- /.content -->

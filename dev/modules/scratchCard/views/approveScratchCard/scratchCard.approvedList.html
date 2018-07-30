@@ -1,0 +1,73 @@
+<section class="content-header"> 
+  <h1>
+    <i class="mdi mdi-cards"></i>
+    Approved Scratch Cards
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+
+        <div class="alert alert-danger" ng-show="scratchCardCtrl.error">{{ scratchCardCtrl.error_message }}</div>
+        <div class="alert alert-success" ng-show="scratchCardCtrl.success">{{ scratchCardCtrl.success_message }}</div>
+
+        <div class="box-body" ng-show="!scratchCardCtrl.paginationLoaded" ng-hide="scratchCardCtrl.paginationLoaded">
+          
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        
+        <div class="table-minimal-2" ng-show="scratchCardCtrl.paginationLoaded">                    
+          <table ng-table="scratchCardCtrl.tableParams" class="table filter-table">
+            <thead>
+              <tr>
+                <th class="has-search-input">
+                  <button class="dropdown-toggle search" data-toggle="dropdown">
+                    <p class="title"><i class="mdi mdi-magnify"></i>Uploaded By</p>
+                  </button>
+                  <div class="dropdown-menu">
+                    <input placeholder="Uploaded By" type="text" class="form-control" ng-model="scratchCardCtrl.tableParams.filter()['uploadedBy']">
+                  </div>
+                  <p ng-if="scratchCardCtrl.tableParams.filter()['uploadedBy'].length > 0" class="filter-text">Filter by: {{scratchCardCtrl.tableParams.filter()['uploadedBy']}}</p>
+                </th>
+                <th>Uploaded Date</th>
+                <th>Approved Date</th>
+                <th>Recharge Amount</th> 
+                <th>Serial No Range</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="scratchCardCtrl.approvedScratchCards.length" ng-repeat="scratch in scratchCardCtrl.approvedScratchCards" ng-click="scratchCardCtrl.detailModal(scratch)">
+                  <!-- <td style="text-align: left"  title="'S.N'" class="text-center">
+                    <span>{{$index+scratchCardCtrl.sno}}</span>
+                  </td> -->
+                  <td>{{scratch.uploadedBy.name}}</td>
+                  <td>{{scratch.uploadedDate | date: 'yyyy-MMM-dd h:mma'}}</td>
+                  <td>{{scratch.approvedDate | date: 'yyyy-MMM-dd h:mma'}}</td>
+                  <td>{{scratch.amount}}</td>
+                  <td>{{scratch.scratchCardDetailDtos[0].serialNumber}} - {{scratch.scratchCardDetailDtos[scratch.scratchCardDetailDtos.length - 1].serialNumber}}</td>
+                  <td class="action-column">
+                    <a uib-tooltip="Activate" ng-click="scratchCardCtrl.approveScratch(scratch); $event.stopPropagation();">
+                      <i class="mdi mdi-check"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr ng-if="scratchCardCtrl.paginationLoaded && scratchCardCtrl.approvedScratchCards.length === 0">
+                  <td colspan="6">No records found.</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+  </div>
+</div>
+
+</section>

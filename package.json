@@ -1,0 +1,33 @@
+{
+  "name": "smart-card-admin",
+  "version": "1.0.0",
+  "description": "Admin Component",
+  "main": "Gruntfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-bootlint": "^0.10.1",
+    "grunt-cleanempty": "^1.0.4",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-csslint": "^2.0.0",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-htmlmin": "^2.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-image": "^2.2.2",
+    "grunt-includes": "^1.0.0",
+    "grunt-ng-annotate": "^3.0.0",
+    "grunt-usemin": "^3.1.1",
+    "grunt-ftp-deploy": "0.1.10",
+    "grunt-filerev": "2.3.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pukar Shrestha",
+  "license": "ISC"
+}

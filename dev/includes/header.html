@@ -1,0 +1,38 @@
+<div>
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <!-- <a href="index2.html" class="logo"> -->
+    <div class="user-profile-block">
+      <div class="user-profile-icon">
+        <img src="{{vm.userPhoto.message}}" ng-click="vm.userProfileNavi()" alt="">
+      </div>      
+      <div class="user-proifle-details">
+        <p class="user-name">{{vm.userInfo.username}} <button><i class="mdi mdi-settings" ng-click="vm.userProfileNavi()"></i></button></p>
+        <p class="user-profile-name"><i class="mdi mdi-checkbox-blank-circle"></i>{{vm.userInfo.adminProfile.description}}</p>
+      </div>
+    </div>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <!-- <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a> -->
+       <div class="brand">
+        <img src="img/brand.png" alt="">
+      </div>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account Menu -->
+          <li>
+            <button ng-click="vm.logout()" class="btn btn-icon" uib-tooltip="Sign Out" tooltip-placement="bottom-right"><i class="mdi mdi-logout-variant"></i></button>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
+</div>

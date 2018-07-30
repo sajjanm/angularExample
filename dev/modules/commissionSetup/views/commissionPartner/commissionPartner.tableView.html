@@ -1,0 +1,80 @@
+<section class="content-header">
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    List of Commission Partners
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Your Page Content Here -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- /.box-header -->
+      <div class="alert alert-danger" ng-show="commissionPartnerCtrl.error">{{ commissionPartnerCtrl.error_message }}</div>
+      <div class="alert alert-success" ng-show="commissionPartnerCtrl.success">{{ commissionPartnerCtrl.success_message }}</div>
+
+      <div class="box-body" ng-show="!commissionPartnerCtrl.paginationLoaded">
+        <div class="loader-block">
+          <div class="loader"></div>
+          <p class="loader-text">Please wait...</p>
+        </div>
+      </div>
+
+      <div class="table-minimal-2" ng-show="commissionPartnerCtrl.paginationLoaded">                    
+        <table ng-table="commissionPartnerCtrl.tableParams" class="table filter-table">
+          <thead>
+            <tr>
+              <th class="has-search-input">
+                <span>Partner Name</span>
+                <button class="dropdown-toggle search" data-toggle="dropdown"><i class="mdi mdi-magnify"></i></button>
+                <div class="dropdown-menu">
+                  <input type="text" placeholder="Name" class="form-control" ng-model="commissionPartnerCtrl.tableParams.filter()['name']">
+                </div>
+                <span ng-if="commissionPartnerCtrl.tableParams.filter()['name'].length > 0" class="filter-text">Filter by:{{ commissionPartnerCtrl.tableParams.filter()['name']}}</span>
+              </th>
+              <th>Organizatin Name</th>
+              <th>Phone Number</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>  
+            <tr ng-if="commissionPartnerCtrl.allPartnerByPagination.length" ng-repeat="partner in commissionPartnerCtrl.allPartnerByPagination" ng-click="commissionPartnerCtrl.detailModal(partner)">
+              <!-- <td style="text-align: left" class="text-center">
+                <span>{{$index+commissionPartnerCtrl.sno}}</span>
+              </td> -->
+              <td>{{partner.name}}</td>
+              <td>{{partner.companyName}}</td>
+              <td>{{partner.contact}}</td>
+              <td class="action-column">
+                <a uib-tooltip="Edit Partner" ng-click="commissionPartnerCtrl.editPartner(partner); $event.stopPropagation();">
+                  <i class="mdi mdi-pen"></i>
+                </a>
+                <a uib-tooltip="Delete Partner" ng-click="commissionPartnerCtrl.deleteModal(partner); $event.stopPropagation();">
+                  <i class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+            <tr ng-if="commissionPartnerCtrl.paginationLoaded && commissionPartnerCtrl.allPartnerByPagination.length === 0">
+              <td colspan="5">
+                <div class="box-main-icon no-records">
+                 <div class="image-holder">
+                  <img src="img/ic-no-record.png" alt="">                    
+                </div>
+                <span>No record(s) found</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>  
+      </table>
+    </div>
+
+  </div>
+  <!-- /.box -->
+</div>
+</div>
+</section>

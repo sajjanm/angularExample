@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Upload Profile Photo</h3>
+  <button class="btn btn-close" type="button" ng-click="ppCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+
+<div class="alert alert-danger" ng-show="ppCtrl.error">{{ ppCtrl.error_message }}</div>
+<div class="alert alert-success" ng-show="ppCtrl.success">{{ ppCtrl.success_message }}</div>
+
+<div class="box-body" ng-show="ppCtrl.spin">
+  <div class="loader-block">
+    <div class="loader"></div>
+    <p class="loader-text">Please wait...</p>
+  </div>
+</div>
+
+<div class="modal-box-body dark-card" id="modal-body" ng-show="!ppCtrl.spin">
+
+  <form name="profilePhoto_form">
+    <div class="box-body">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="picture-crop-block text-center">
+            <div class="picture-crop-title"></div>
+            <div class="picture-crop-content">
+              <div class="picture-upload-instructions">
+                <i class="mdi mdi-face"></i>
+                <p>Please click on the "Choose File" button to upload your profile picture. </p>
+                <ul>
+                  <li>Your photo must be in JPEG/JPG/PNG format.</li>
+                  <li>The file size must be 2MB or less.</li>
+                </ul>
+              </div>    
+              <div class="upload-action col-md-12 text-center">
+                 <input type="file" id="file-upload" class="input-type-file" ngf-select ng-model="ppCtrl.photo.picFile" ngf-pattern="'image/*'" ngf-max-size="2MB" name="photo" ngf-accept="'image/*'" required>
+                 <i ng-show="profilePhoto_form.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i> 
+                 <div class="col-md-8 col-md-offset-2 text-center">
+                    <button type="button" id="choose-file-button" class="btn btn-hollow btn-full"><i class="ti-icon ti-upload"></i>Choose File</button>
+                    <button class="btn btn-primary btn-full" type="button" ng-click="ppCtrl.uploadPhoto()" ng-disabled="!ppCtrl.photo.picFile && profilePhoto_form.$invalid">Upload</button>
+                 </div>
+             </div>
+               
+            </div>  
+
+          </div>
+        </div>
+        <div class="col-md-6"> 
+          <div class="picture-preview-block text-center">
+            <div class="picture-preview-title">Profile Picture Preview</div>
+              <div class="picture-preview-content">
+                <img ng-src="{{ppCtrl.photo.croppedDataUrl}}" ng-show="ppCtrl.photo.picFile"/>    
+                <img ng-src="{{ppCtrl.profilePhotoLocation}}" class="croppedDataUrl" alt="User Image" ng-hide="ppCtrl.photo.picFile">        
+              </div>
+            <div class="picture-crop-content">
+              <div ngf-drop ng-model="ppCtrl.photo.picFile" ngf-pattern="image/*" class="cropArea">
+                  <img-crop image="ppCtrl.photo.picFile | ngfDataUrl" result-image="ppCtrl.photo.croppedDataUrl" result-image-size="320" ng-init="ppCtrl.photo.croppedDataUrl=''">
+                  </img-crop>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

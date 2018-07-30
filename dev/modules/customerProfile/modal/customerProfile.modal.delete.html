@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Delete Customer Bank Profile</h3>
+  <button class="btn btn-close" type="button" ng-click="cpmCtrl.cancel()"><i class="mdi mdi-close"></i></button>
+</div>
+
+<div class="modal-body" id="modal-body">
+  <form name="customerProfile_form" ng-submit="cpmCtrl.ok()" class="form-horizontal">
+
+    <div class="box-body">
+      <div class="box-section">
+        <div class="box-section-content">
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Profile Name</label>
+            <div class="form-value">{{cpmCtrl.profile.name}}</div>
+          </div>
+
+          <!-- textarea -->
+          <div class="col-md-4 form-group">
+            <label class="control-label has-value">Description</label>
+            <div class="form-value">{{cpmCtrl.profile.description}}</div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label has-value required-field">Delete Remarks</label>
+              <input type="text" class="form-control" id="deleted_remarks" name="deleted_remarks" placeholder="Delete Remarks" ng-model="cpmCtrl.profile.deletedRemarks" required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-block">
+        <button class="btn btn-primary" type="submit" ng-disabled="customerProfile_form.$invalid">Delete</button>
+      </div>
+    </div>  
+  </form>
+</div>

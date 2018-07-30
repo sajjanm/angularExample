@@ -1,0 +1,22 @@
+<div ng-controller="DashboardController as vm">
+
+	<div ng-show="vm.loaded" ng-hide="!vm.loaded" class="wrapper">
+		<div ng-include src="'includes/header.html'"></div>
+		<div ng-include src="'includes/navigation.html'"></div>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper" ui-view>
+			</div>
+			<!-- /.content-wrapper -->
+
+		<div ng-include src="'includes/footer.html'"></div>
+	</div>
+
+	<div ng-show="!vm.loaded" ng-hide="vm.loaded" class="hold-transition login-page">
+		<div class="loader-block light">
+	        <div class="loader"></div>
+	        <p class="loader-text">Please wait...</p>
+	      </div>
+	</div>
+
+</div>

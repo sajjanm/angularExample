@@ -1,0 +1,137 @@
+<section class="content-header"> 
+  <button class="btn btn-icon btn-back" type="button" ng-click="scratchCardCtrl.cancelActivate()"><i class="mdi mdi-arrow-left"></i></button>
+  <h1>
+    <i class="mdi mdi-cards"></i>
+    Scratch Card Details
+  </h1>
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+
+        <div class="box-body" ng-show="!scratchCardCtrl.paginationLoaded">
+          <div class="loader-block">
+            <div class="loader"></div>
+            <p class="loader-text">Please wait...</p>
+          </div>
+        </div>
+
+        <!-- gives the admin to choose the list of scratch cards pins -->
+
+        <div ng-show="!scratchCardCtrl.previewMode">
+          <!-- form start -->
+          <ng-form method="post" name="approve_form" class="form-horizontal" >
+              <div class="box">
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="expiryDate" class="col-md-3 control-label">Expiry Date </label>
+
+                    <div class="col-md-5 form-value">{{scratchCardCtrl.approvedScratchCardDetail.scratchCardDetailDtos[0].expiryDate | date: 'yyyy-MMM-dd h:mma'}}</div>
+                  </div>               
+
+                  <div class="form-group">
+                    <label for="amount" class="col-md-3 control-label">Amount </label>
+
+                    <div class="col-md-5 form-value">{{scratchCardCtrl.approvedScratchCardDetail.scratchCardDetailDtos[0].amount}}</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="range" class="col-md-3 control-label">Ranges </label>
+
+                    <div class="col-md-3 has-required-validation">
+                      <input type="text" class="form-control" name="from" ng-model="scratchCardCtrl.approve.range.from" placeholder="From" only-numbers required >                      
+                    </div>
+                    <div class="col-md-3 has-required-validation">
+                      <input type="text" class="form-control" name="to" ng-model="scratchCardCtrl.approve.range.to" placeholder="To" only-numbers required>                      
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="specific" class="col-md-3 control-label">Specific</label>
+                    <div class="col-md-5">
+                      <tags-input type="text" class="form-control multi-tag-form-control" id="specific" name="specific" placeholder="Specific serial number" ng-model="scratchCardCtrl.approve.specific" name="specific" display-property="serialNo" add-from-autocomplete-only="true" on-change="scratchCardCtrl.disableActivateButton()" debounce-delay="2000" maxlength="100" required>
+
+                        <auto-complete source="scratchCardCtrl.serialNumberList"></auto-complete>
+                      </tags-input>  
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              
+
+              <div class="table-minimal-2">
+                <table class="table filter-table">
+                  <thead>
+                    <tr>
+                      <th>Expiry Date</th>
+                      <th>Serial Number</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="scratchCardDetail in scratchCardCtrl.approvedScratchCardDetail.scratchCardDetailDtos.slice(((scratchCardCtrl.currentPage-1)*scratchCardCtrl.itemsPerPage), ((scratchCardCtrl.currentPage)*scratchCardCtrl.itemsPerPage))" >
+                      <!-- <td>{{scratchCardCtrl.itemsPerPage * (scratchCardCtrl.currentPage - 1) + $index + 1}}</td> -->
+                      <td>{{scratchCardDetail.expiryDate | date: 'yyyy-MMM-dd h:mma'}}</td>
+                      <td>{{scratchCardDetail.serialNumber}}</td>
+                    </tr>  
+                  </tbody>
+                </table>
+
+                
+              </div>
+              <div class="pagination-has-button">
+                <div class="col-md-4 pull-left">
+                  <button type="button" class="btn btn-primary" ng-disabled="!scratchCardCtrl.isValid()" ng-click="scratchCardCtrl.previewScratchCardDetails()">Confirm</button>
+                </div>               
+                <div class="col-md-8 pull-right">
+                  <div class="ng-table-pager">
+                    <ul uib-pagination boundary-links="true" items-per-page ="scratchCardCtrl.itemsPerPage" total-items="scratchCardCtrl.approvedScratchCardDetail.scratchCardDetailDtos.length" ng-model="scratchCardCtrl.currentPage" class="pagination-sm" max-size="scratchCardCtrl.maxSize" ></ul>
+                  </div> 
+                 </div> 
+              </div>
+
+
+          </ng-form>
+        </div>
+
+        <!-- Shows the admin the detail list of scratch card for preview -->
+        <div ng-show="scratchCardCtrl.previewMode">
+            <div class="table-minimal-2">
+              <table class="table filter-table">
+                <thead>
+                  <tr>
+                    <!-- <th>S.No. </th> -->
+                    <th>Expiry Date</th>
+                    <th>Serial Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="scratchCardDetail in scratchCardCtrl.confirmedScratchCardDetail.slice(((scratchCardCtrl.currentPage-1)*scratchCardCtrl.itemsPerPage), ((scratchCardCtrl.currentPage)*scratchCardCtrl.itemsPerPage))" >
+                    <!-- <td>{{scratchCardCtrl.itemsPerPage * (scratchCardCtrl.currentPage - 1) + $index + 1}}</td> -->
+                    <td>{{scratchCardDetail.expiryDate | date: 'yyyy-MMM-dd h:mma'}}</td>
+                    <td>{{scratchCardDetail.serialNumber}}</td>
+                  </tr>  
+                </tbody>
+              </table>
+              
+            </div>
+            <div class="pagination-has-button">
+              <div class="col-md-4 pull-left">
+                <button type="button" class="btn btn-success" ng-click="scratchCardCtrl.approveScratchCardPins()">Approve</button>
+              </div>               
+              <div class="col-md-8 pull-right">
+                <div class="ng-table-pager">
+                  <ul uib-pagination boundary-links="true" items-per-page ="scratchCardCtrl.itemsPerPage" total-items="scratchCardCtrl.confirmedScratchCardDetail.length" ng-model="scratchCardCtrl.currentPage" class="pagination-sm" max-size="scratchCardCtrl.maxSize" ></ul>
+                </div>
+               </div> 
+            </div>
+
+        </div>
+    </div>
+  </div>        
+</section>

@@ -1,0 +1,102 @@
+<section class="content-header">
+  <button class="btn btn-icon btn-back" type="button" ng-click="commissionSlabCtrl.cancelUpdate()"><i class="mdi mdi-arrow-left"></i></button>
+  <h1>
+    <i class="mdi mdi-account-box"></i>
+    Edit Commission Slab
+  </h1>
+
+  <!-- <my-breadcrumb></my-breadcrumb> -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- form start -->
+      <form ng-submit="commissionSlabCtrl.updateSlab(commissionSlab_form)" name="commissionSlab_form" class="form-horizontal">
+        <div class="box">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="slab_name" class="col-sm-2 control-label required-field">Commission Slab Name</label>
+
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="slab_name" name="slab_name" placeholder="Commission Slab Name" ng-model="commissionSlabCtrl.slab.name" autocomplete="off" ng-change="adminCtrl.clearValidationError('name')" maxlength="50" required>
+                <div class ="required-validation">
+                  <span class="alert-icon alert-success" ng-show="(commissionSlab_form.slab_name.$valid) && !commissionSlabCtrl.validationError.name">
+                    <i class="fa fa-check"></i>
+                  </span>
+                  <span class="alert-icon alert-warning" uib-tooltip="Name is required." ng-show="(commissionSlab_form.slab_name.$error.required)&&(commissionSlab_form.slab_name.$dirty)">
+                    <i class="fa fa-exclamation"></i>
+                  </span>
+                  <span class="alert-icon alert-danger" uib-tooltip="{{commissionSlabCtrl.validationError.name}}" ng-show="commissionSlabCtrl.validationError.name">
+                    <i class="fa fa-times"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- textarea -->
+            <div class="form-group">
+              <label for="description" class="col-sm-2 control-label required-field">Description</label>
+
+              <div class="col-sm-5">
+                <textarea style="resize: none" class="form-control" rows="3" id="description" name="description" placeholder="Description ..." ng-model="commissionSlabCtrl.slab.description" ng-change="commissionSlabCtrl.clearValidationError('description')" maxlength="250" required></textarea>
+                <div class ="required-validation">
+                  <span class="alert-icon alert-success" ng-show="(commissionSlab_form.description.$valid) && !commissionSlabCtrl.validationError.description">
+                    <i class="fa fa-check"></i>
+                  </span>
+                  <span class="alert-icon alert-warning" uib-tooltip="Slab description is required" ng-show="(commissionSlab_form.description.$error.required && commissionSlab_form.description.$dirty)">
+                    <i class="fa fa-exclamation"></i>
+                  </span>
+                  <span class="alert-icon alert-danger" uib-tooltip="{{commissionSlabCtrl.validationError.description}}" ng-show="commissionSlabCtrl.validationError.description">
+                    <i class="fa fa-times"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="box-body">
+            <table class="table table-bordered-minimal">
+              <thead>
+                <tr>
+                  <th>Charge Type</th>
+                <!-- <th>Range From</th>
+                <th>Range To</th> -->
+                <th>Ranges</th>
+                <th>Charge Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="commissionSlabValue in commissionSlabCtrl.slab.commissionSlabValueRequests">
+                <td>
+                  <div class="col-sm-10 form-control">{{commissionSlabValue.chargeType}}</div>
+                </td>
+                <!-- <td>
+                  <div class="col-sm-10 form-control">{{commissionSlabValue.rangeFrom}}</div>
+                </td> -->
+                <td>
+                  <div class="col-sm-10 form-control" ng-if="!commissionSlabValue.andAboveRange">{{commissionSlabValue.rangeTo}}</div>
+                  <div ng-if="commissionSlabValue.andAboveRange">{{commissionSlabValue.rangeFrom}} and above ranges</div>
+                </td>
+                <td>
+                  <div class="col-sm-10 form-control">{{commissionSlabValue.charge}}</div>
+                </td>
+              </tr>
+            </tbody>     
+          </table> 
+        </div>
+      </div>
+
+      <div class="btn-block">
+        <label class="col-sm-3 control-label"></label>
+        <div class="col-md-9">
+          <button type="submit" class="btn btn-primary" ng-disabled="commissionSlab_form.$invalid">Update</button>  
+        </div>
+      </div>
+    </form>
+  </div>
+</div>        
+</section>
